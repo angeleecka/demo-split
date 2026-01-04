@@ -1,0 +1,125 @@
+/* modalPass.css
+
+=======================================*/
+/* ---- Модальное окно входа ---- */
+/*=======================================*/
+
+.modal {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(59, 43, 32, 0.96); /* чуть темнее, чем было */
+  display: none; /* скрыто по умолчанию */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  /* легкая матовость (если поддерживается) */
+  backdrop-filter: blur(1px);
+}
+.modal[aria-hidden="true"] {
+  display: none;
+}
+.modal[aria-hidden="false"],
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 320px;
+  max-width: calc(100% - 32px);
+  text-align: center;
+}
+
+/* Поля ввода в модалке */
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Обёртка поля пароля + глазик */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+#passwordInput {
+  flex: 1;
+  width: 100%;
+  padding-right: 40px; /* место под глазик */
+}
+#togglePassword {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  line-height: 1;
+  color: #333;
+  padding: 0;
+}
+
+/* Кнопка-глазик — отдельный класс, чтобы не наследовала общий стиль кнопок */
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  line-height: 1;
+  color: #333;
+  padding: 0;
+}
+
+/* Кнопки действий модалки (Войти / Отмена) — стилизуем только их, не глазик */
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 8px;
+}
+.modal-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+.modal-actions button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Сообщения об ошибке */
+.modal-content .error,
+#loginError {
+  color: #d93025;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  min-height: 1.2em; /* чтобы не прыгала верстка */
+}
+
+/* Фокусы — доступность клавиатурой */
+a:focus,
+button:focus,
+input:focus,
+select:focus {
+  outline: 2px solid #a67e5a;
+  outline-offset: 2px;
+  border-radius: 4px;
+}

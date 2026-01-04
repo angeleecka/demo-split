@@ -1,0 +1,412 @@
+/*  MOBILE-FIRST.css  */
+
+/* =========================
+   БАЗОВАЯ РАЗМЕТКА
+   ========================= */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+main.admin-body {
+  display: block;
+  height: auto;
+  overflow: visible;
+}
+
+/* Toast notifications */
+.toast {
+  position: fixed;
+  bottom: var(--space-6); /* 20px -> var(--space-6) */
+  right: var(--space-6); /* 20px -> var(--space-6) */
+  background: var(--color-text-strong); /* #333 -> var(--color-text-strong) */
+  color: var(--color-text-on-accent);
+  padding: var(--space-3) var(--space-4); /* 12px 18px -> var(--space-3) var(--space-4) */
+  border-radius: var(--radius-md); /* 8px -> var(--radius-md) */
+  opacity: 0;
+  transform: translateY(var(--space-5)); /* 20px -> var(--space-5) */
+  transition: opacity var(--dur-quick), transform var(--dur-quick);
+  font-size: 14px; /* Оставил, так как нет переменной */
+  z-index: 9999;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-success {
+  background: var(--toast-success-bg);
+}
+.toast-error {
+  background: var(--toast-error-bg);
+}
+.toast-info {
+  background: var(--toast-info-bg);
+}
+.toast-warning {
+  background: var(--toast-warning-bg);
+}
+
+/* =========================
+     КНОПКА (три точки / гамбургер)
+     ========================= */
+.admin-drawer-btn {
+  flex: 0 0 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: var(--header-bg);*/
+  border: none;
+  height: auto;
+  align-self: stretch;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.admin-drawer-btn:focus {
+  outline: none;
+}
+
+/* Кнопка-крестик (закрытие панели) */
+.admin-drawer-close {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  background: none;
+  border: none;
+  font-size: var(--fs-h3);
+  line-height: 1;
+  color: var(--color-secondary);
+  cursor: pointer;
+  z-index: 1100;
+  display: none;
+}
+
+.admin-explorer.is-open .admin-drawer-close {
+  display: block;
+}
+.admin-explorer.is-open .admin-drawer-close:focus {
+  outline: none;
+}
+
+/* =========================
+     ПАНЕЛЬ (off-canvas на мобилке)
+     ========================= */
+.admin-explorer {
+  position: fixed;
+  left: 0;
+  top: var(--admin-header-h);
+  height: calc(100vh - var(--admin-header-h));
+  width: min(var(--admin-drawer-w), 86vw);
+  max-width: 92vw;
+  transform: translateX(-100%);
+  transition: transform var(--dur-quick) var(--easing);
+  z-index: 1001;
+  box-shadow: var(--shadow-md);
+  border-right: 1px solid var(--color-primary-600);
+
+  border-radius: 5px;
+  /* padding: var(--space-3);*/
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.admin-explorer.is-open {
+  transform: translateX(0);
+}
+
+.admin-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#adminBackdrop[hidden] {
+  display: none;
+}
+
+.admin-explorer.is-open ~ .admin-preview .admin-drawer-btn {
+  visibility: hidden;
+  pointer-events: none;
+}
+/* =========================
+     ПАНЕЛЬ: элементы
+     ========================= */
+.admin-explorer > h2 {
+  margin: 0 0 var(--space-3);
+  font-size: 1.1rem; /* Оставил, так как нет переменной */
+  font-weight: 600; /* Оставил, так как нет переменной */
+  text-align: center;
+  background-color: var(--color-secondary);
+  color: var(--color-text-on-accent);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+}
+
+.admin-hint {
+  font-size: 13px;
+  color: #a33;
+  margin: var(--space-2) 0 var(--space-3);
+  padding: var(--space-2);
+  border-left: 3px solid #e71010;
+  background: #fff5f5;
+  border-radius: var(--radius-sm);
+}
+
+fieldset.op-block {
+  color: var(--color-text-muted); /* #8d8b8b -> var(--color-text-muted) */
+}
+
+.op-block legend {
+  font-size: var(--fs-h5); /* 0.8rem -> var(--fs-h5) (или другая переменная) */
+  font-weight: 600;
+  color: var(--color-text-muted); /* #8d8b8b -> var(--color-text-muted) */
+  background-color: var(
+    --surface-primary-light
+  ); /* #f0e6d8 -> var(--surface-primary-light) */
+  padding: 0 var(--space-2); /* 0 8px -> 0 var(--space-2) */
+}
+
+.admin-ops {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4); /* 14px -> var(--space-4) */
+}
+
+.admin-ops .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3); /* 10px -> var(--space-3) */
+  margin-bottom: var(--space-3); /* 10px -> var(--space-3) */
+}
+
+.row input {
+  flex-grow: 1;
+  padding: var(--space-2); /* 6px -> var(--space-2) */
+  border: 1px solid #ccc; /* Оставил, нет переменной */
+  border-radius: var(--radius-sm); /* 4px -> var(--radius-sm) */
+  margin: 0 var(--space-2); /* 0 8px -> 0 var(--space-2) */
+  box-sizing: border-box;
+}
+
+.admin-input {
+  width: 260px;
+  box-sizing: border-box;
+}
+
+.row button {
+  background-color: var(--color-secondary);
+  color: var(--color-text-on-accent);
+  padding: 5px var(--space-3); /* 5px 10px -> 5px var(--space-3) */
+  border: none;
+  border-radius: var(--radius-sm); /* 4px -> var(--radius-sm) */
+  cursor: pointer;
+  white-space: nowrap;
+  margin-left: var(--space-3); /* 10px -> var(--space-3) */
+}
+
+.row button:hover {
+  background-color: var(--color-primary);
+}
+
+/* =========================
+     ПРАВАЯ ПАНЕЛЬ (портфолио)
+     ========================= */
+
+/* На всех админских страницах */
+body.hero-page {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.portfolio-main {
+  background-color: var(--surface-1);
+  color: var(--color-black); /* #000 */
+  padding-top: var(--space-3); /* 10px -> var(--space-3) */
+}
+
+.admin-preview {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+/* =========================
+     Заголовок и хлебные крошки
+     ========================= */
+.header-top {
+  display: flex;
+  align-items: stretch;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* ← было  center*/
+  justify-content: center;
+  text-align: left; /* ← было center */
+  /*padding: var(--space-1);*/
+  padding-left: 10px;
+  line-height: 0;
+}
+
+.header-center h2 {
+  margin: 0;
+  text-align: left;
+  font-size: 1.2rem;
+}
+
+.breadcrumbs {
+  font-size: 0.9rem; /* Оставил, нет переменной */
+  margin-top: var(--space-2); /* 6px -> var(--space-2) */
+  color: var(--color-primary); /* #a67e5a -> var(--color-primary) */
+  text-align: left;
+}
+
+.breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover,
+.breadcrumbs a.active {
+  text-decoration: underline;
+}
+
+.breadcrumbs span {
+  margin: 0 var(--space-2); /* 0 6px -> 0 var(--space-2) */
+  color: var(--color-text-muted);
+}
+
+/* =========================
+     DESKTOP (панель статична сбоку)
+     ========================= */
+
+@media (min-width: 762px) {
+  .nav-toggle {
+    display: hidden;
+  }
+}
+
+@media (min-width: 1024px) {
+  main.admin-body {
+    display: flex;
+    gap: var(--space-4); /* 16px -> var(--space-4) */
+    height: calc(100vh - var(--admin-header-h));
+    overflow: hidden;
+  }
+
+  main.admin-body > section.admin-preview {
+    flex: 1;
+    min-width: 0;
+  }
+
+  main.admin-body > aside.admin-explorer {
+    position: relative;
+    transform: none !important;
+    height: auto;
+    top: 0;
+    width: var(--admin-drawer-w);
+    flex: 0 0 var(--admin-drawer-w);
+    box-shadow: none;
+    border-right: none;
+  }
+
+  .admin-drawer-btn {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .admin-backdrop {
+    display: none !important;
+  }
+
+  .header-center {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .header-center h2 {
+    margin-left: 0;
+  }
+
+  .breadcrumbs {
+    text-align: left;
+    margin-left: 0;
+  }
+}
+/* i18n wrappers should be layout-neutral */
+[data-i18n] {
+  display: contents; /* “растворяет” обёртку, оставляя только текст */
+}
+
+/* Мобильный режим админки: вместо правой панели — лайтбокс */
+@media (max-width: 900px) {
+  #previewPane {
+    display: none !important;
+  }
+}
+
+/* Лайтбокс всегда поверх всего */
+.mlb {
+  z-index: 5000 !important;
+}
+
+/* Когда открыт лайтбокс — прячем кнопку «три точки» */
+body.mlb-open .admin-drawer-btn {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* context menu */
+.admin-ctx {
+  position: fixed;
+  min-width: 180px;
+  max-width: min(260px, 90vw);
+  /* чтобы не выезжало за нижний край и появлялся скролл внутри */
+  max-height: calc(100vh - 16px);
+  overflow-y: auto;
+  background: var(--surface-1, #fff);
+  color: var(--color-text, #222);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 6px;
+  z-index: 3001;
+  display: none;
+}
+.admin-ctx.open {
+  display: block;
+}
+
+.admin-ctx button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+}
+.admin-ctx button:hover {
+  background: rgba(0, 0, 0, 0.06);
+}

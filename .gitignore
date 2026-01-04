@@ -1,0 +1,41 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn.lock
+.pnpm-store/
+
+# Builds & caches
+dist/
+coverage/
+*.map
+
+# User content / big media
+trash/
+versions/
+uploads/_tmp/
+trash/Upload
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+*.env
+
+# Archives / dumps
+*.zip
+*.7z
+*.rar
+
+# Editor
+.vscode/
+
+# генерация
+data/portfolio.json
+scripts/_tmp/
+
+# swagger-редакторы/кеши
+docs/
+docs/*.tmp
+reader/

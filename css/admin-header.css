@@ -1,0 +1,109 @@
+/*  admin-header.css */
+/* ======================== */
+/* Базовый хедер            */
+/* ======================== */
+.headerRelative {
+  position: relative; /* Или static, если нужно, чтобы он был полностью в потоке */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: var(--z-header);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(var(--space-4) / 5) var(--space-6);
+  background: none;
+}
+
+/* ======================== */
+/* Цвета через переменные   */
+/* ======================== */
+.header {
+  /* цвет текста/логотипа в обычном состоянии */
+  --header-fg: var(--color-secondary);
+  /* цвет линий бургера в обычном состоянии */
+  --burger-color: var(--color-primary);
+}
+
+/* Липкий хедер */
+.header.sticky {
+  --header-fg: var(--color-text-on-accent); /* например, белый */
+  --burger-color: var(--color-text-on-accent); /* например, белый */
+}
+
+/* ======================== */
+/* Лого                     */
+/* ======================== */
+.logo {
+  color: var(--header-fg);
+}
+
+/* ======================== */
+/* Навигация                */
+/* ======================== */
+.nav-links a:hover {
+  background: var(--color-primary);
+  color: var(--nav-active-color);
+}
+
+.active-link a {
+  color: var(--nav-active-color);
+  border-left: 1px solid var(--color-secondary);
+  background: var(--color-primary);
+}
+
+/* ======================== */
+/* Кнопка-бургер            */
+/* ======================== */
+.nav-toggle {
+  width: var(
+    --click-area
+  ); /* Используем нашу переменную для кликабельной области */
+  height: var(--click-area);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--nav-gap-toggle);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: var(--z-nav-toggle);
+}
+
+/* Линии бургера */
+.nav-toggle span {
+  display: block;
+  width: var(--burger-line-width); /* Заменили 24px на переменную */
+  height: var(--burger-line-height); /* Заменили 2px на переменную */
+  border-radius: var(--radius-pill); /* Заменили 2px на переменную */
+  background: var(--burger-color);
+  transition: background var(--dur-quick); /* Заменили 0.2s на переменную */
+}
+
+/* ======================== */
+/* Десктопное поведение     */
+/* ======================== */
+@media (min-width: 769px) {
+  .nav-toggle {
+    display: none; /* скрываем бургер */
+  }
+}
+
+/* i18n wrappers should be layout-neutral */
+[data-i18n] {
+  display: contents; /* “растворяет” обёртку, оставляя только текст */
+}
+
+.admin-body #header {
+  z-index: 2000;
+}
+.admin-body #header nav {
+  z-index: 2001;
+}
+.admin-body #header .nav-toggle,
+.admin-body .admin-drawer-btn {
+  position: relative;
+  z-index: 2002;
+}

@@ -1,0 +1,32 @@
+# Нормализуем переводы строк
+* text=auto eol=lf
+
+*.js  text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.md  text eol=lf
+
+# Картинки и видео считаем бинарными (без диффов)
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.gif  binary
+*.mp4  binary
+*.webm binary
+*.mov binary
+*.zip binary
+*.7z  binary
+
+*.ico  binary
+*.pdf  binary
+*.ttf  binary
+*.otf  binary
+*.woff binary
+*.woff2 binary
+
+
+# Эти файлы/артефакты без диффов
+data/portfolio.json -diff -merge
+docs/swagger.json   -diff

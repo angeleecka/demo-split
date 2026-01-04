@@ -1,0 +1,717 @@
+/* =========================
+   1. Общий контейнер контента
+   ========================= */
+
+/* Прокручиваемая зона с категориями и файлами */
+.preview-scroll {
+  height: 100%;
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(100vh - 60px);
+  padding: 10px;
+  box-sizing: border-box;
+  min-height: 0;
+}
+
+#content {
+  flex: 1 1 auto;
+  min-width: 240px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* чтобы один тап не вызывал двойной-тап-зум и жесты работали предсказуемо */
+#content .js-file,
+#content .gallery img,
+#content .gallery video {
+  touch-action: manipulation;
+}
+
+.admin-explorer {
+  background: var(--color-panel-bg);
+}
+
+/* =========================
+   2. Сетка категорий и галереи файлов
+   (одинаковая сетка для category-list и gallery)
+   ========================= */
+#content .category-list,
+#content .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+  padding: 0;
+}
+
+/* =========================
+   3. Карточка категории (папка)
+   ========================= */
+.category-card {
+  display: block;
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border-radius: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  background: var(--card-bg);
+  box-shadow: 0 1px 6px var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px var(--shadow-card-lg);
+}
+
+/* Заголовок внутри карточки */
+.category-card .card-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 14px;
+  font: 600 16px/1.2 "Roboto Condensed", sans-serif;
+  color: var(--color-text-on-accent);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.45) 60%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+}
+
+/* Фоновое изображение в карточке */
+.category-card .card-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.88);
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+.category-card:hover .card-image {
+  transform: scale(1.05);
+  filter: brightness(0.98);
+}
+
+/* подсветка папки во время DnD */
+.category-card.drop-hover {
+  outline: 2px dashed var(--color-primary);
+  outline-offset: 4px;
+}
+
+/* =========================
+   4. Ячейки файлов (файлы в галерее)
+   ========================= */
+#content .cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Превью файлов (картинки/видео) */
+#content .cell > img,
+#content .cell > video {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+/* Подпись под файлами */
+#content .cell .file-caption {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+  text-align: center;
+  word-break: break-word;
+}
+
+/* Если вы используете разные классы для файлов и папок, 
+   используйте их: */
+.js-file.selected,
+.category-card.selected {
+  outline: 3px solid var(--previewPane-resizing);
+  outline-offset: 3px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Lightbox для мобильных экранов (по умолчанию скрыт) */
+.mlb[hidden] {
+  display: none;
+}
+
+.mlb {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: var(--mlb-background);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mlb-stage {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  z-index: 99000;
+}
+
+.mlb-stage img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Навигация */
+
+/* Устанавливаем базовые стили для всех кнопок */
+.mlb-btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 60px;
+  height: 120px;
+  cursor: pointer;
+  color: var(--color-text-icon);
+}
+
+.mlb-prev {
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.mlb-next {
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.mlb-btn svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Двигаем стрелки внутри зоны */
+.mlb-prev svg {
+  transform: translateX(-20%);
+}
+
+.mlb-next svg {
+  transform: translateX(20%);
+}
+.mlb-btn:hover path {
+  stroke: var(--color-primary);
+}
+
+/* Крестик закрытия */
+
+.mlb-close {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  font: inherit;
+  color: inherit;
+  line-height: 1;
+
+  outline: none;
+  box-shadow: none;
+
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+}
+
+.mlb-close::before,
+.mlb-close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 1.5px;
+  background-color: var(--color-text-icon);
+  transform-origin: center;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.mlb-close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.mlb-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.mlb-close:hover::before,
+.mlb-close:hover::after {
+  background-color: var(--close-btn-1);
+  transform: translate(-50%, -50%) scale(1.1) rotate(45deg);
+}
+.mlb-close:hover::after {
+  transform: translate(-50%, -50%) scale(1.1) rotate(-45deg);
+}
+
+/* Подпись и счётчик */
+.mlb-bottom {
+  color: var(--color-text-icon);
+  padding: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  body.hero-page {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}
+
+/* ── Admin layout invariants (desktop) ────────────────────── */
+@media (min-width: 1024px) {
+  body.admin-body {
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  main.admin-body {
+    display: flex;
+    gap: 2px;
+    height: calc(100vh - var(--admin-header-h));
+    overflow: hidden;
+  }
+
+  main.admin-body > aside.admin-explorer {
+    position: relative;
+    transform: none !important;
+    box-shadow: none;
+    border-right: none;
+    width: var(--admin-drawer-w);
+    flex: 0 0 var(--admin-drawer-w);
+  }
+
+  main.admin-body > section.admin-preview {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* === File manager: на всю правую колонку === */
+
+  /* Убираем внутренний большой хедер справа */
+  .admin-preview .sticky-header {
+    display: none;
+  }
+
+  /* Правый скролл-контейнер: чтобы менеджер начинался прямо от верха ячейки */
+  .admin-preview {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .admin-preview .preview-scroll {
+    /* важно: растягиваем файловый менеджер на всю высоту правой колонки */
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto;
+    max-height: none;
+    overflow: hidden;
+    padding: 0; /* было 10px со всех сторон */
+  }
+
+  .admin-preview #workspace {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .admin-preview #workspace .file-manager-container {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto !important;
+  }
+
+  .admin-preview #workspace .file-manager-main {
+    min-height: 0;
+  }
+
+  /* Делаем контейнер файлового менеджера «родным» для ячейки */
+  .admin-preview .file-manager-container {
+    height: 100%; /* вместо 100vh из styles.css */
+    background-color: transparent; /* фон берём из страницы */
+    font-family: inherit; /* шрифт как у сайта, а не Segoe UI демки */
+  }
+}
+
+/* Мобилка: off-canvas как раньше */
+@media (max-width: 900px) {
+  /* Делаем правую область независимой по высоте от дерева */
+  main.admin-body {
+    display: block;
+    height: calc(100dvh - var(--admin-header-h, 0px));
+    min-height: calc(100dvh - var(--admin-header-h, 0px));
+    overflow: hidden;
+  }
+
+  main.admin-body > section.admin-preview {
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .admin-preview .preview-scroll {
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .admin-preview #workspace {
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* сам менеджер пусть уверенно занимает высоту родителя */
+  .admin-preview .file-manager-container {
+    height: 100% !important;
+    min-height: 0;
+  }
+
+  /* off-canvas дерево как раньше */
+  .admin-explorer {
+    position: fixed;
+  }
+}
+
+/* i18n-wrapper neutral on admin */
+.admin-body [data-i18n] {
+  display: contents !important;
+}
+
+/* Подсветка папки при dragover */
+.category-card.drop-target {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* перетаскиваемые элементы */
+.js-file.dragging {
+  opacity: 0.65;
+  outline: 2px dashed var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ты уже добавила подсветку цели дропа: */
+.category-card.drop-target {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+/* DnD fix (Chrome/Safari): разрешаем перетаскивание превью */
+#content .js-file {
+  -webkit-user-drag: element;
+  user-drag: element; /* на всякий случай */
+  pointer-events: auto; /* страховка */
+}
+/* вырезанные элементы пока не вставлены */
+#content .cutting {
+  opacity: 0.6;
+  filter: saturate(0.7);
+}
+
+/* --- Плитки папок в админке --- */
+
+.admin-preview .portfolio-grid {
+  /* на всякий случай: стандартная сетка */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+}
+
+/* сама карточка — фиксированное соотношение сторон */
+.admin-preview .category-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 2; /* шире — ниже, но пропорции держим */
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+/* фон-картинка занимает всю карточку */
+.admin-preview .category-card .card-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+/* заголовок всегда *у нижнего края* */
+.admin-preview .category-card .card-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0; /* главное — прижать к низу */
+  padding: 0.4rem 0.6rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* можно чуть уменьшать шрифт на очень широких экранах,
+   чтобы текст не выглядел гигантом на маленьких плитках */
+@media (min-width: 1200px) {
+  .admin-preview .category-card .card-title {
+    font-size: 0.9rem;
+  }
+}
+
+/* ВРЕМЕННО: прячем старую сетку файлов админки,
+   пока переносим её в новый файловый менеджер */
+.admin-preview #workspace > #content {
+  display: none !important;
+}
+
+/* === Встраиваем файловый менеджер в правую колонку админки === */
+
+/* Делаем контейнер файлового менеджера "родным" для ячейки */
+.admin-preview .file-manager-container {
+  height: 100% !important; /* вместо calc(100vh - 40px) */
+  max-width: none !important; /* убираем ограничение по ширине */
+  margin: 0 !important; /* без центровки карточкой */
+  border-radius: 0 !important; /* без скругления у краёв ячейки */
+  box-shadow: none !important; /* убираем "карту" поверх страницы */
+  background: transparent !important; /* фон берём из страницы админки */
+}
+.admin-preview .file-manager-container .panel .panel-content {
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* Force full-height workspace even when tree is hidden */
+main.admin-body {
+  height: calc(100dvh - var(--admin-header-h, 0px));
+  min-height: calc(100dvh - var(--admin-header-h, 0px));
+  overflow: hidden;
+}
+
+main.admin-body > section.admin-preview {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-preview .preview-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+  overflow: hidden;
+  padding: 0;
+}
+
+.admin-preview #workspace {
+  flex: 1 1 auto;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.admin-preview .file-manager-container {
+  height: 100%;
+  min-height: 0;
+}
+
+/* =================================
+вставка
+================================*/
+
+/* MOBILE FIXES (admin): поднять бургер-меню над файловым менеджером
+   ВАЖНО: НЕ меняем position у nav/#main-nav — только слои (z-index). */
+
+#header.portfolio-header {
+  z-index: 9000;
+}
+
+/* nav уже позиционируется в main-styles.css; просто поднимаем слой */
+#header.portfolio-header #main-nav {
+  z-index: 9010;
+}
+
+/* кнопка бургера и выпадашка */
+#header.portfolio-header .nav-toggle {
+  z-index: 9020;
+}
+#header.portfolio-header .nav-links {
+  z-index: 9030;
+  position: relative;
+}
+
+/* сам файловый менеджер — ниже хедера */
+.file-manager-container,
+.admin-body,
+.admin-preview {
+  position: relative;
+  z-index: 1;
+}
+
+/* Админ-дерево (дровер) — поверх менеджера */
+@media (max-width: 900px) {
+  .admin-backdrop {
+    z-index: 8500;
+  }
+  .admin-explorer {
+    z-index: 8600;
+  }
+
+  /* на всякий — если вдруг потерялась анимация открытия */
+  .admin-explorer {
+    transform: translateX(-110%);
+  }
+  .admin-explorer.is-open {
+    transform: translateX(0);
+  }
+}
+
+/* =========================
+   MOBILE FIXES (admin)
+   ========================= */
+
+/* (3) Header dropdown (burger) must be above the file manager */
+#header.portfolio-header,
+header.portfolio-header {
+  position: relative;
+  z-index: 7000;
+}
+
+#header.portfolio-header #main-nav .nav-links,
+header.portfolio-header #main-nav .nav-links {
+  position: relative; /* keeps z-index working even if other css changes it */
+  z-index: 7002;
+}
+
+/* ensure file manager stays behind header dropdown */
+
+.file-manager-container {
+  position: relative;
+  z-index: 1;
+}
+
+.file-manager-footer .btn-text {
+  padding-left: 5px;
+}
+
+/* (1) Tree panel as a real off-canvas drawer on narrow screens */
+@media (max-width: 900px) {
+  .admin-explorer {
+    position: fixed;
+    top: var(--admin-header-h, 0px);
+    left: 0;
+    bottom: auto;
+    height: calc(100dvh - var(--admin-header-h, 0px));
+
+    width: min(86vw, 340px);
+    max-width: 92vw;
+
+    transform: translateX(-110%);
+    transition: transform 180ms ease;
+
+    z-index: 6500;
+    overflow: auto;
+
+    border-right: 1px solid var(--border-color);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .admin-explorer.is-open {
+    transform: translateX(0);
+  }
+
+  /* keep the open button clickable */
+  #adminDrawerBtn {
+    position: relative;
+    z-index: 6600;
+    background: none;
+  }
+
+  /* close button inside drawer (if it's a child of .admin-explorer) */
+  .admin-explorer .admin-drawer-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    z-index: 6601;
+  }
+}
+
+@media (max-width: 600px) {
+  /* текст на самых узких — прячем, оставляем иконки */
+  .file-manager-footer .btn-text {
+    display: none;
+  }
+}
+
+/* Футер на очень узких экранах: ужимаем, если не хватает — прячем разделители */
+@media (max-width: 500px) {
+  .file-manager-footer {
+    flex-wrap: nowrap; /* ключевое: НЕ переносим */
+    justify-content: space-between;
+    gap: 6px;
+    padding: 6px 6px;
+    align-items: center;
+    padding: 6px 8px;
+    gap: 4px;
+  }
+  .toolbar-separator {
+    margin: 0 6px;
+  }
+
+  .file-manager-footer .toolbar-btn {
+    padding: 6px 8px;
+    min-width: 34px;
+    height: 36px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* compact text buttons (your Create folder / Upload file) */
+  #create-folder-btn,
+  #upload-file-btn {
+    font-size: 12px;
+    line-height: 1.1;
+    padding: 6px 10px;
+  }
+}

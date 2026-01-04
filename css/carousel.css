@@ -1,0 +1,123 @@
+/* carousel.css
+
+================================
+     Hero / Carousel
+  ================================ */
+/* Карусель */
+#hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s var(--easing-io);
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: var(--color-text-on-accent);
+  font-size: 2.5em;
+  font-weight: 200;
+  text-align: center;
+  padding: 30px 20px 60px; /* можно потом тоже на токены */
+  text-shadow: var(--shadow-text);
+  background-color: var(--surface-hero-overlay);
+  z-index: 10;
+  width: auto;
+  margin: 0;
+  box-sizing: border-box;
+  line-height: 1.1;
+}
+
+.scroll-down-arrow {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  animation: bounce 2s infinite;
+  z-index: 10;
+}
+
+.scroll-down-arrow::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 16px;
+  height: 16px;
+  border-right: 2px solid var(--scroll-down-arrow);
+  border-bottom: 2px solid var(--scroll-down-arrow);
+  transform: rotate(45deg);
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* ================================
+     Кнопка "Перейти в Портфолио"
+  ================================ */
+
+#portfolio-link {
+  background-color: var(--color-primary);
+  text-align: center;
+}
+
+.portfolio-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.portfolio-button {
+  display: inline-block;
+  padding: 20px 40px;
+  color: var(--color-text-on-accent);
+  text-decoration: none;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  border: 2px solid var(--color-text-on-accent);
+  border-radius: 5px;
+}
+
+.portfolio-button:hover {
+  background-color: var(--color-text-on-accent);
+  color: var(--color-primary);
+}

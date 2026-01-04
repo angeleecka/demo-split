@@ -1,0 +1,323 @@
+<!--index.html-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" >
+    <meta 
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    >
+    <title>COMPANY</title>
+
+    <link rel="stylesheet" href="css/variables.css" >
+    <link rel="stylesheet" href="css/main-styles.css" >
+    <link rel="stylesheet" href="css/carousel.css" >
+    <link rel="stylesheet" href="css/home.css" >
+    <link rel="stylesheet" href="css/contacts.css" >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" >
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap"
+      rel="stylesheet"
+    >
+
+    <link 
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    >
+
+    <link rel="icon" href="favicon.png" type="image/png" >
+
+    <link rel="stylesheet" href="/css/contacts.css?v=<%= cssVersion %>" >
+  </head>
+
+  <body class="hero-page">
+    <header id="header" class="header">
+      <div class="logo">FANTASY</div>
+
+      <button class="nav-toggle" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav id="main-nav" aria-label="Main navigation">
+        <ul class="nav-links">
+          <li class="active-link"><a href="index.html">Home</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="#contacts">Contacts</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="hero" data-trigger="hero" data-trigger-position="bottom">
+        <div class="carousel">
+          <div class="carousel-slide">
+            <img src="img/Rome/894173575244699782.jpg" alt="Roman style/look">
+            <p class="carousel-text">
+              WHAT IF YOU COULD BECOME ANYONE YOU WANT, EVEN FOR A SHORT TIME?
+            </p>
+          </div>
+          <div class="carousel-slide">
+            <img src="img/The_Great_Gatsby/894239261400813359.jpg" alt="Gatsby style/look">
+            <p class="carousel-text">WHICH LOOK WOULD YOU CHOOSE?</p>
+          </div>
+          <div class="carousel-slide">
+            <img src="img/Egipt/894167987492287447.jpg" alt="Egyptian style/look">
+            <p class="carousel-text">
+              LIVE YOUR SPECIAL STORY, DON'T JUST GET A PHOTO!
+            </p>
+          </div>
+        </div>
+        <a href="#intro-text" class="scroll-down-arrow"></a>
+      </section>
+
+      <section id="intro-text">
+        <div class="intro-container">
+          <div class="intro-image-wrapper">
+            <img src="img/894663995011633060.jpg" alt="About us">
+          </div>
+          <div class="intro-text-wrapper">
+            <p>
+              In a world where content is increasingly created by artificial
+              intelligence, we offer you something real. Not generated images,
+              but living memories you’ll share with friends for a lifetime. This
+              cannot be generated. We give you what no AI ever can — a true
+              experience. The feeling of becoming a character, the thrill of an
+              adventure, the joy of being part of a unique creative process. You
+              won’t just walk away with photos or videos — you’ll take with you
+              authentic memories that last forever. Your images won’t be the
+              product of digital tricks, but something you genuinely lived
+              through. And that means not only visual beauty, but warmth in
+              every memory.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio-link">
+        <div class="portfolio-container">
+          <a href="portfolio.html" class="portfolio-button">GO TO PORTFOLIO</a>
+        </div>
+      </section>
+
+      <section id="services-intro">
+        <h2 class="section-title">OUR SERVICES</h2>
+
+        <div class="services-grid">
+          <div class="service-card">
+            <img src="img/knight.jpg" alt="The image of a medieval knight" >
+            <div class="service-card-content">
+              <h3 class="services-title">MEDIEVAL ROMANCE</h3>
+              <p class="services-description">
+                Become the hero of a legend - a photo shoot in the armor of a
+                medieval knight with a castle setting and atmospheric lighting.
+              </p>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <img 
+              src="img/The_Great_Gatsby/Gatsby.jpeg"
+              alt="Great Gatsby style look"
+            >
+            <div class="service-card-content">
+              <h3 class="services-title">THE GREAT GATSBY</h3>
+              <p class="services-description">
+                Live the era of jazz and luxury. Bright makeup, elegant hairdo
+                and 20s gloss - everything to make you shine at any party.
+              </p>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <img 
+              src="img/Edo/894259125624529647.jpg"
+              alt="Ancient Japanese style image"
+            >
+            <div class="service-card-content">
+              <h3 class="services-title">ANCIENT EDO</h3>
+              <p class="services-description">
+                A queen or a geisha? Or maybe a noble prince? Immerse yourself
+                in the subtleties of the ancient East and experience its charm.
+              </p>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <img 
+              src="img/Greece/894166711886976122.jpg"
+              alt="Image in ancient Greek style"
+            >
+            <div class="service-card-content">
+              <h3 class="services-title">ANCIENT GREECE</h3>
+              <p class="services-description">
+                Touch the philosophy of elegance in the image of an ancient muse
+                or immerse yourself in the era of the birth of science in the
+                role of a noble patrician.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio-link">
+        <div class="portfolio-container">
+          <a href="portfolio.html" class="portfolio-button">GO TO PORTFOLIO</a>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="about-container">
+          <h2 class="section-title">OUR TEAM</h2>
+          <div class="team">
+            <div class="team-member">
+              <img src="img/team/Visagiste.jpg" alt="Visagiste" >
+              <h3>Visagiste</h3>
+              <p>
+                The ability to see and create unique images, from natural makeup
+                to complex makeup. The ability to work with facial features,
+                emphasizing advantages and hiding disadvantages. Expertise in
+                selecting cosmetics suitable for different skin types and
+                shooting conditions.
+              </p>
+            </div>
+
+            <div class="team-member">
+              <img src="img/team/Hair_stylist.jpg" alt="Stylist" >
+              <h3>Stylist</h3>
+              <p>
+                Deep knowledge of hairstyles of different eras. Mastery of
+                various styling and hair working techniques, which allows you to
+                embody any, even the most complex historical image. The ability
+                not only to recreate, but also to adapt a historical hairstyle
+                to a modern type, so that the image looks harmonious and
+                convincing.
+              </p>
+            </div>
+
+            <div class="team-member">
+              <img src="img/team/Photographer-cameraman.jpg" alt="Cameraman" >
+              <h3>Cameraman</h3>
+              <p>
+                Ability to work with light, composition and angles to create
+                atmospheric and expressive images. Deep knowledge of photo and
+                video equipment to achieve the highest quality of shooting.
+                Ability to direct the model to achieve the desired emotion and
+                story in the frame.
+              </p>
+            </div>
+
+            <div class="team-member">
+              <img src="img/team/Dressmaker-costumer.jpg" alt="Dresser" >
+              <h3>Dresser</h3>
+              <p>
+                Ability to recreate costumes from different eras with attention
+                to the smallest details. Skills in working with different
+                fabrics and materials, from sewing to decorating. Ability to
+                create not only beautiful, but also comfortable costumes that
+                will withstand all filming conditions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==== CONTACTS ==== -->
+
+      <section id="contacts">
+        <div class="contacts-container">
+          <div class="contacts-description">
+            <h2 class="section-title">CONTACTS</h2>
+            <p>
+              Contact us to discuss your dream look. We are always happy to
+              answer your questions and help bring your ideas to life.
+            </p>
+          </div>
+
+          <div class="contact-info">
+            <div class="contact-item">
+              <i class="bi bi-envelope-fill"></i>
+              <a href="mailto:info@yourwebsite.com">info@yourwebsite.com</a>
+            </div>
+            <div class="contact-item">
+              <i class="bi bi-telephone-fill"></i>
+              <a href="tel:+1234567890">+1 (234) 567 890</a>
+            </div>
+            <div class="contact-item">
+              <i class="bi bi-geo-alt-fill"></i>
+              <span>123, Megapolis</span>
+            </div>
+          </div>
+
+          <form action="#" class="contact-form">
+            <div class="form-group">
+              <input 
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your name"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <input 
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Your Email"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <textarea 
+                id="message"
+                name="message"
+                placeholder="Your message"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="submit-button">Send message</button>
+          </form>
+
+          <div class="map-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d434929.3684252999!2d2.684422218531747!3d48.95104246576468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2ses!4v1754639285745!5m2!1sru!2ses"
+              width="600"
+              height="450"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-info">
+          <p>
+            <a href="#header" class="logoFooter">FANTASY</a>
+          </p>
+          <p>&copy; 2025 All rights reserved</p>
+        </div>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <script defer src="js/header.js"></script>
+    <script defer src="js/script.js"></script>
+    <script defer src="js/error-handler.js"></script>
+  </body>
+</html>

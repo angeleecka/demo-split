@@ -1,0 +1,504 @@
+<!-- admin-portfolio.html (restored layout + safe tweaks) -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>OFFICE | FANTASY</title>
+
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/main-styles.css" />
+    <link rel="stylesheet" href="css/header-contrast.css" />
+    <!--  <link rel="stylesheet" href="css/admin-header.css" /> -->
+
+    <link rel="stylesheet" href="css/MOBILE-FIRST.css" />
+    <link rel="stylesheet" href="css/admin-portfolio-desktop.css" />
+    <link rel="stylesheet" href="data/portfolio-admin-page/styles.css" />
+    <!-- <link rel="stylesheet" href="css/modalPass.css"> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <link rel="icon" href="favicon.png" type="image/png" />
+
+    <script>
+      (function () {
+        // ✅ сохраняем оригиналы ОДИН РАЗ
+        window.__consoleOriginal = window.__consoleOriginal || {
+          log: console.log.bind(console),
+          warn: console.warn.bind(console),
+          info: console.info.bind(console),
+          debug: console.debug.bind(console),
+          error: console.error.bind(console),
+        };
+    
+        const DEBUG = localStorage.getItem("fm_debug") === "1";
+        window.__FM_DEBUG__ = DEBUG;
+    
+        // ✅ маячок (всегда через оригинальный error)
+        window.__consoleOriginal.error("[fm_debug] DEBUG =", DEBUG, "fm_debug =", localStorage.getItem("fm_debug"));
+    
+        if (!DEBUG) {
+          console.log = function () {};
+          console.warn = function () {};
+          console.info = function () {};
+          console.debug = function () {};
+          // error не трогаем
+        } else {
+          // ✅ восстановление
+          console.log = window.__consoleOriginal.log;
+          console.warn = window.__consoleOriginal.warn;
+          console.info = window.__consoleOriginal.info;
+          console.debug = window.__consoleOriginal.debug;
+          console.error = window.__consoleOriginal.error;
+        }
+      })();
+/*
+
+*/
+
+    </script>
+    
+
+  </head>
+
+  <body>
+    <header
+      id="header"
+      class="header headerRelative portfolio-header"
+      data-no-sticky
+    >
+      <div class="logo">FANTASY</div>
+
+      <button class="nav-toggle" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav id="main-nav" aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <!-- оставляем якорь на главную и страховку от перехвата -->
+          <li><a href="index.html#contacts" data-no-scroll>Contacts</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="admin-body">
+      <!-- Левая колонка -->
+      <aside class="admin-explorer">
+        <button class="admin-drawer-close" aria-label="Close tab">
+          &times;
+        </button>
+
+        <div class="admin-header">
+   <!--        <h2>Control panel</h2>
+        </div>
+        <p class="admin-hint">
+          ⚠️ Before creating a folder or file, ensure you are in the correct
+          section.
+        </p>
+
+        <div class="admin-ops">
+          <fieldset class="op-block">
+            <legend class="op-title">Create / Portfolio</legend>
+            <div class="row create-group">
+              <input
+                id="mkdirName"
+                class="admin-input"
+                placeholder="Enter folder name"
+              />
+              <button id="btnMkdir" class="ok" type="button">
+                Create folder
+              </button>
+              <input type="file" id="fileInput" class="admin-input" />
+              <button id="btnUpload" class="ok" type="button">Upload</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="op-block">
+            <legend class="op-title">Rename</legend>
+            <div class="row rename-group">
+              <input
+                id="renameOld"
+                class="admin-input"
+                placeholder="Old folder/file name"
+              />
+              <input
+                id="renameNew"
+                class="admin-input"
+                placeholder="New folder/file name"
+              />
+              <button id="btnRename" type="button">Rename</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="op-block">
+            <legend class="op-title">Delete</legend>
+            <div class="row delete-group">
+              <input
+                id="deleteName"
+                class="admin-input"
+                placeholder="Enter folder/file name"
+              />
+              <button id="btnDelete" type="button">Delete</button>
+              <button id="btnRestore" type="button">Restore</button>
+            </div>
+          </fieldset>
+       -->  </div>
+      
+                <!-- Новый блок для дерева файловой структуры -->
+                <div id="tree-panel" class="panel left-panel">
+                  <div class="panel-header">File structure</div>
+                  <div id="file-tree" class="panel-content">
+                    <!-- Временный заглушка-текст, чтобы видеть место -->
+                    <p class="file-tree-placeholder">
+                      There will be a Portfolio folder tree here…
+                    </p>
+                  </div>
+                </div>
+              </aside>
+        
+      </aside>
+
+      <!-- Правая колонка -->
+      <section class="admin-preview">
+        <div class="sticky-header">
+          <div class="header-top">
+            <button
+              id="adminDrawerBtn"
+              class="admin-drawer-btn"
+              aria-controls="adminDrawer"
+              aria-expanded="false"
+              aria-label="Open panel"
+            >
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="12"
+                  cy="5"
+                  r="2"
+                  stroke="none"
+                  fill="currentColor"
+                ></circle>
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="2"
+                  stroke="none"
+                  fill="currentColor"
+                ></circle>
+                <circle
+                  cx="12"
+                  cy="19"
+                  r="2"
+                  stroke="none"
+                  fill="currentColor"
+                ></circle>
+              </svg>
+            </button>
+
+            <div class="header-center">
+              <h2 id="pageTitle" class="section-title">Portfolio Administration</h2>
+              <nav id="breadcrumbs" class="breadcrumbs"></nav>
+            </div>
+          </div>
+        </div>
+
+        <section class="preview-scroll">
+          <div id="workspace" class="workspace">
+            <!-- Старый грид и предпросмотр оставляем в DOM, но скрываем -->
+            <div id="content" class="portfolio-grid" hidden></div>
+        
+            <aside id="previewPane" class="preview-pane" hidden>
+              <div id="previewResizer" class="resizer" aria-hidden="true"></div>
+        
+              <div class="preview-body">
+                <div class="preview-media">
+                  <button
+                    id="previewCloseBtn"
+                    class="close-btn"
+                    type="button"
+                    aria-label="Close"
+                  ></button>
+                  <img id="previewImage" alt="" />
+
+                  <video id="previewVideo" controls playsinline hidden></video>
+
+                </div>
+        
+                <div id="previewError" class="preview-error" hidden>
+                  Failed to upload image
+                </div>
+              </div>
+            </aside>
+        
+            <!-- Новый каркас файлового менеджера -->
+            <div class="file-manager-container">
+              <div class="file-manager-main">
+                <div class="list-panels-container">
+                  <!-- Первая панель списка -->
+                  <div id="list-panel-1" class="panel right-panel">
+                    <div class="panel-header" data-panel="1">
+                      <div class="panel-header-title" data-panel="1">Portfolio</div>
+                      <nav class="panel-header-breadcrumbs" data-panel="1">
+                        Portfolio
+                      </nav>
+                    </div>
+                    <div id="file-list-1" class="panel-content"></div>
+                  </div>
+                  
+        
+                  <!-- Вторая панель списка (изначально скрыта) -->
+                  <div id="list-panel-2" class="panel right-panel hidden">
+                    <div class="panel-header" data-panel="2">
+                      <div class="panel-header-title" data-panel="2">Portfolio</div>
+                      <nav class="panel-header-breadcrumbs" data-panel="2">
+                        Portfolio
+                      </nav>
+                    </div>
+                    <div id="file-list-2" class="panel-content"></div>
+                  </div>
+                  
+                </div>
+              </div>
+        
+              <!-- Нижний тулбар (пока без логики, только каркас) -->
+              <div id="toolbar" class="file-manager-footer">
+                <button
+                  id="split-single-btn"
+                  class="toolbar-btn active"
+                  type="button"
+                  title="One screen (no split panels)"
+                >
+                  
+                  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                </button>
+        
+                <button
+                  id="split-vertical-btn"
+                  class="toolbar-btn"
+                  type="button"
+                  title="Split the panel into two vertical windows"
+                >
+                  
+                  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="3" width="8" height="18" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13" y="3" width="8" height="18" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                </button>
+        
+                <button
+                  id="split-horizontal-btn"
+                  class="toolbar-btn"
+                  type="button"
+                  title="Split the panel into two horizontal windows"
+                >
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="3" width="18" height="8" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="13" width="18" height="8" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                </button>
+        
+                <span class="toolbar-separator">|</span>
+        
+                <button
+  id="create-folder-btn"
+  class="toolbar-btn toolbar-action"
+  type="button"
+  title="Create folder"
+>
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+    <path d="M3 7a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"
+      fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      <path
+  d="M17.7 15.6V18.2M16.4 16.9H19.0"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+/>
+
+      
+  </svg>
+  <span class="btn-text">Create folder</span>
+</button>
+
+<button
+  id="upload-file-btn"
+  class="toolbar-btn toolbar-action"
+  type="button"
+  title="Upload file"
+>
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+    <path d="M12 15V3"
+      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <path d="M8 7l4-4 4 4"
+      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"
+      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span class="btn-text">Upload file</span>
+</button>
+
+
+                <span class="toolbar-separator">|</span>
+
+
+                <button
+                  id="view-row-btn"
+                  class="toolbar-btn active"
+                  type="button"
+                  title="Display contents as strings"
+                >
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                </button>
+
+                <button
+                  id="view-tile-btn"
+                  class="toolbar-btn"
+                  type="button"
+                  title="Display content as tiles"
+                >
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                </button>
+<!--
+                <button id="themeToggleBtn" title="Переключить тему">
+                  <span id="themeIconContainer">
+                      
+                  </span>
+                  
+                  <span id="themeName" style="display: none;"></span> 
+              </button>
+-->
+      
+              </div>
+              <div id="context-menu" class="context-menu hidden">
+                <ul>
+                  <!-- Действия по пустому месту / текущей папке -->
+                  <li data-action="create-folder" data-scope="panel">Create folder</li>
+                  <li data-action="upload" data-scope="panel">Upload file</li>
+                  <!-- <li class="separator" data-scope="panel"></li> -->
+
+                  <!-- Действия по конкретному элементу (файл/папка) -->
+                  <li data-action="open" data-scope="item">
+                    <span class="cm-label">Open / Preview</span>
+                    <span class="cm-hotkey">Enter</span>
+                  </li>
+                  
+                  <li data-action="rename" data-scope="item">
+                    <span class="cm-label">Rename...</span>
+                    <span class="cm-hotkey">F2</span>
+                  </li>
+                  
+                  <li data-action="delete" data-scope="item">
+                    <span class="cm-label">Delete...</span>
+                    <span class="cm-hotkey">Del</span>
+                  </li>
+                  
+
+                </ul>
+              </div>
+        
+             
+          
+        
+            </div>
+          </div>
+        </section>
+        
+      </section>
+    </main>
+
+    <!-- Lightbox / Media Slider -->
+    <div
+      id="mediaLightbox"
+      class="mlb"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      hidden
+    >
+      <div class="mlb-backdrop"></div>
+      <button
+        id="mlbClose"
+        class="mlb-btn mlb-close"
+        aria-label="Close"
+      ></button>
+
+      <button id="mlbPrev" class="mlb-btn mlb-prev" aria-label="Previous slide">
+        <svg viewBox="0 0 40 100" width="40" height="100" aria-hidden="true">
+          <path
+            d="M25 20 L10 50 L25 80"
+            stroke="currentColor"
+            stroke-width="1.5"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+      </button>
+
+      <button id="mlbNext" class="mlb-btn mlb-next" aria-label="Next slide">
+        <svg viewBox="0 0 40 100" width="40" height="100" aria-hidden="true">
+          <path
+            d="M15 20 L30 50 L15 80"
+            stroke="currentColor"
+            stroke-width="1.5"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+      </button>
+
+      <div class="mlb-stage" id="mlbStage" aria-live="polite"></div>
+      <div class="mlb-bottom">
+        <div class="mlb-caption" id="mlbCaption"></div>
+        <div class="mlb-counter" id="mlbCounter"></div>
+      </div>
+    </div>
+
+    <div id="confirm-modal" class="confirm-modal hidden" role="dialog" aria-modal="true">
+      <div class="confirm-card">
+        <div class="confirm-title" id="confirm-title">Подтверждение</div>
+        <div class="confirm-text" id="confirm-text"></div>
+        <div class="confirm-actions">
+          <button id="confirm-cancel" class="btn secondary">Отмена</button>
+          <button id="confirm-ok" class="btn danger">Да</button>
+        </div>
+      </div>
+    </div>
+
+    
+    
+    
+
+
+  <!--   <script type="module" src="src/index.js"></script>-->
+
+    <script src="js/header.js"></script>
+
+    <script src="js/admin-ui.js"></script>
+    <script src="js/admin-actions.js"></script>
+
+  
+    <script src="js/error-handler.js"></script>
+
+     <!--    <script src="data/portfolio-admin-page/js/ModalConfirm.js"></script>-->
+    <script src="data/portfolio-admin-page/js/FileTree.js"></script>
+    <script src="data/portfolio-admin-page/js/FileOperations.js"></script>
+  </body>
+</html>

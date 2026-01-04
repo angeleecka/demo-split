@@ -1,0 +1,173 @@
+:root {
+  /* ======================================= */
+  /* 🎨 Базовые токены (примитивы) */
+  /* Эти переменные содержат конкретные значения. Их не нужно менять часто. */
+  /* ======================================= */
+
+  /* Цвета */
+  --color-primary: #c7956a;
+  --color-primary-trans: #c7956a65;
+  --color-primary-600: #a67e5a;
+  --color-secondary: #4d3323;
+  --color-accent-brown: #a67c52;
+
+  --color-panel-bg: #ccb097;
+
+  --color-black: #000;
+
+  /* Тексты */
+  --color-text-body: #222;
+  --color-text-strong: #333;
+  --color-text-muted: #555;
+  --color-text-on-accent: #fff;
+  --color-text-icon: #fff;
+
+  /* Поверхности */
+  --surface-1: #fff;
+  --surface-2: #f4f4f4;
+  --surface-primary-light: #ede8d0;
+  --card-bg: #f3f3f3;
+  --surface-menu: rgba(0, 0, 0, 0.8);
+  --surface-hero-overlay: rgba(0, 0, 0, 0.3);
+  --surface-sticky: rgba(0, 0, 0, 0.85);
+  --previewResizer: #ddd;
+  --previewPane-resizing: #c96;
+  --mlb-background: rgba(0, 0, 0, 0.9);
+
+  /* Уведомления */
+  --toast-success-bg: #2e7d32;
+  --toast-error-bg: #c62828;
+  --toast-info-bg: #1565c0;
+  --toast-warning-bg: #ed6c02;
+
+  /* Типографика */
+  --font-body: "Roboto Condensed", sans-serif;
+  --font-heading: "Poiret One", sans-serif;
+  --fs-base: 16px;
+  --fs-p: 1.3rem;
+  --fs-h1: 3rem;
+  --fs-h2: 2rem;
+  --fs-h3: 1.5rem;
+  --fs-nav-link: 1.5rem;
+  --lh-base: 1.5;
+  --lh-heading: 1.2;
+  --nav-font-size-mobile: 1.5rem;
+  --nav-line-height-mobile: 2;
+  --nav-font-weight: 100;
+  --nav-font-size-landscape: 0.9rem;
+  --nav-font-size-desktop: 1rem;
+  --nav-line-height-desktop: 1.3;
+  --logo-font-size: 2em;
+
+  /* Отступы */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-sm: var(--space-2);
+  --space-md: var(--space-4);
+  --space-lg: var(--space-6);
+  --nav-gap-desktop: 10px;
+  --nav-gap-toggle: 6px;
+  --nav-padding-landscape-y: 0.7rem;
+  --nav-padding-landscape-x: 1.5rem;
+  --nav-padding-desktop-y: 8px;
+  --nav-padding-desktop-x: 14px;
+  --header-padding: 5px 20px;
+  --header-padding-desktop: 5px 20px;
+  --header-padding-sticky: 5px 20px;
+
+  /* Радиусы */
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 9999px;
+  --radius-round: 50%;
+
+  /* Тени */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --shadow-card: 0 4px 8px rgba(0, 0, 0, 0.08);
+  --shadow-card-lg: 0 8px 16px rgba(0, 0, 0, 0.12);
+  --shadow-sticky: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-text: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  --shadow-header: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  /* Анимации */
+  --dur-quick: 0.3s;
+  --dur-normal: 0.4s;
+  --easing: ease;
+  --easing-io: ease-in-out;
+  --hover-translate-sm: -4px;
+
+  /* ======================================= */
+  /* 🚀 Семантические токены (токены компонентов) */
+  /* Эти переменные описывают назначение, используя базовые токены. */
+  /* ======================================= */
+
+  /* Контейнеры */
+  --container-max: 1200px;
+  --container-narrow: 800px;
+  --gallery-img-height: 300px;
+
+  /* Навигация */
+  --scroll-down-arrow: rgba(255, 255, 255, 0.7);
+  --close-btn-1: #c00;
+  --close-btn-2: silver;
+  --nav-hover-bg: rgba(255, 255, 255, 0.1);
+  --nav-active-bg: rgba(255, 255, 255, 0.1);
+  --nav-active-bg-contrast: rgba(199, 149, 106, 0.4);
+  --nav-hover-color: var(--surface-1);
+  --nav-active-color: var(--surface-1);
+  --nav-active-color-contrast: var(--color-secondary);
+  --nav-border-active: 1px solid var(--color-primary-600);
+  --menu-top-offset: 12%;
+  --menu-right-offset: 4%;
+  --menu-right-offset-2: 3%;
+  --menu-right-offset-3: 2%;
+  --menu-padding-top: 50px;
+  --menu-width: 190px;
+  --burger-size: 45px;
+  --burger-gap: 6px;
+  --burger-line-width: 24px;
+  --burger-line-height: 2px;
+  --radius-pill: 2px;
+  --burger-sticky-right: 1rem;
+  --burger-sticky-bottom: -12px;
+  --burger-open-top: 1rem;
+  --burger-open-right: 1rem;
+  --header-border-size: 4px;
+  --stripe-thickness: 2px;
+  --logo-sticky-offset: 4%;
+
+  /* Компоненты */
+  --card-max-width: 320px;
+  --card-padding: 1rem;
+  --btn-bg: var(--color-accent-brown);
+  --btn-text: var(--color-text-on-accent);
+  --btn-border: 1px solid var(--surface-1);
+  --btn-padding: 0.8rem 1.5rem;
+  --map-height: 450px;
+  --intro-avatar-size: min(70vw, 400px);
+  --admin-header-h: 64px;
+  --admin-drawer-w: 320px;
+
+  /* Z-index слои */
+  --z-header: 2000;
+  --z-nav-toggle: 2001;
+
+  /* Элементы управления (кнопки, иконки) */
+  --click-area: 44px;
+
+  /* Скорость анимаций */
+  --dur-quick: 0.2s;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --gallery-img-height: 200px;
+  }
+}

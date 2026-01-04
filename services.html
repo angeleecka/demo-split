@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>SERVICES | COMPANY</title>
+
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/main-styles.css" />
+    <link rel="stylesheet" href="css/carousel.css" />
+    <link rel="stylesheet" href="css/services.css" />
+    <link rel="stylesheet" href="css/contacts.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+
+    <link rel="icon" href="favicon.png" type="image/png" />
+
+    <link rel="stylesheet" href="/css/contacts.css?v=<%= cssVersion %>" />
+  </head>
+
+  <header id="header" class="header">
+    <div class="logo">FANTASY</div>
+
+    <button class="nav-toggle" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav id="main-nav" aria-label="Main navigation">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li class="active-link"><a href="services.html">Services</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="#contacts">Contacts</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="hero" data-trigger="hero" data-trigger-position="bottom">
+    <div class="carousel">
+      <div class="carousel-slide">
+        <img
+          src="img/China/894160389695119563.jpg"
+          alt="Makeup in the style of Ancient China"
+        />
+      </div>
+      <div class="carousel-slide">
+        <img
+          src="img/China/894173652554111883.jpg"
+          alt="Makeup in the style of Ancient China"
+        />
+      </div>
+      <div class="carousel-slide">
+        <img
+          src="img/China/894161429077223673.jpg"
+          alt="Makeup in the style of Ancient China"
+        />
+      </div>
+    </div>
+    <a href="#intro-text" class="scroll-down-arrow"></a>
+  </section>
+  <section id="intro-text">
+    <section id="services-list">	
+      <h1 class="services">WHAT CAN WE OFFER YOU?</h2>
+  </section>
+
+  <section id="services">
+    <div class="intro-container">
+      <div class="service-card">
+        <div class="intro-image-wrapper">
+          <img
+            src="./img/Rome/894191170652011989.jpg"
+            alt="Edo era style/look"
+          />
+        </div>
+        <div class="intro-text-wrapper">
+          <h3 class="services-title">Wide Range of Makeup Services</h3>
+          <p>
+            From natural daytime looks to stunning evening and wedding makeup,
+            our goal is to enhance your unique beauty and create a look you'll
+            remember forever.
+          </p>
+        </div>
+        <div class="price-tag">From $495</div>
+      </div>
+
+      <div class="service-card">
+        <div class="intro-image-wrapper">
+          <img src="./img/Edo/894259050462582343.jpg" alt="Edo era image" />
+        </div>
+        <div class="intro-text-wrapper">
+          <h3 class="services-title">Time Travel</h3>
+          <p>
+            Do you dream of stepping into the samurai era or feeling like a
+            noblewoman at the Rococo court? We'll make it happen.
+          </p>
+        </div>
+        <div class="price-tag">Price on Request</div>
+      </div>
+
+      <div class="service-card">
+        <div class="intro-image-wrapper">
+          <img src="img/Rococo/894241430359308597.jpg" alt="Rococo era image" />
+        </div>
+        <div class="intro-text-wrapper">
+          <h3 class="services-title">Your Movie, Your Role</h3>
+          <p>
+            Have you always wanted to feel like a movie star? We'll create a
+            real "trailer" for a film starring you and your friends.
+          </p>
+        </div>
+        <div class="price-tag">From $1,855</div>
+      </div>
+
+      <div class="service-card">
+        <div class="intro-image-wrapper">
+          <img src="img/wedding/895397147002857953.jpg" alt="Celebrations" />
+        </div>
+        <div class="intro-text-wrapper">
+          <h3 class="services-title">An Event for the History Books</h3>
+          <p>
+            Turn your wedding or any other significant celebration into a
+            magnificent costume ball.
+          </p>
+        </div>
+        <div class="price-tag">From $1,855</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio-link">
+    <div class="portfolio-container">
+      <a href="portfolio.html" class="portfolio-button">GO TO PORTFOLIO</a>
+    </div>
+  </section>
+
+  <!-- ==== CONTACTS ==== -->
+
+  <section id="contacts">
+    <div class="contacts-container">
+      <div class="contacts-description">
+        <h2 class="section-title">CONTACTS</h2>
+        <p>
+          Contact us to discuss your dream look. We are always happy to answer
+          your questions and help bring your ideas to life.
+        </p>
+      </div>
+
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="bi bi-envelope-fill"></i>
+          <a href="mailto:info@yourwebsite.com">info@yourwebsite.com</a>
+        </div>
+        <div class="contact-item">
+          <i class="bi bi-telephone-fill"></i>
+          <a href="tel:+1234567890">+1 (234) 567 890</a>
+        </div>
+        <div class="contact-item">
+          <i class="bi bi-geo-alt-fill"></i>
+          <span>123, Megapolis</span>
+        </div>
+      </div>
+
+      <form action="#" class="contact-form">
+        <div class="form-group">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Your name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Your Email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Your message"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="submit-button">Send message</button>
+      </form>
+
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d434929.3684252999!2d2.684422218531747!3d48.95104246576468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2ses!4v1754639285745!5m2!1sru!2ses"
+          width="600"
+          height="450"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-info">
+        <p>
+          <a href="#header" class="logoFooter">FANTASY</a>
+        </p>
+        <p>&copy; 2025 All rights reserved</p>
+      </div>
+      <div class="social-links">
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="js/header.js"></script>
+  <script defer src="js/script.js"></script>
+  <script defer src="js/error-handler.js"></script>
+</html>

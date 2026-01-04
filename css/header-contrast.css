@@ -1,0 +1,98 @@
+/* header-contrast.css
+
+СТИЛИ УНИКАЛЬНЫЕ ДЛЯ СТРАНИЦЫ ПОРТФОЛИО (mobile-first) */
+
+/* Правило для хедера без карусели (страницы портфолио и других без карусели). */
+.headerRelative {
+  position: relative;
+}
+
+/*
+  Стили для хедера на странице портфолио, когда он НЕ липкий.
+  Применяются на белом фоне, чтобы обеспечить контраст.
+*/
+header.header.portfolio-header:not(.sticky) {
+  --header-fg: var(--color-primary);
+  --burger-color: var(--color-primary);
+  background: none;
+}
+
+header.header.portfolio-header:not(.sticky) .logo {
+  color: var(--color-secondary);
+}
+
+/* Ограничиваем переопределение стилей только для горизонтального меню на десктопе */
+@media (min-width: 768px) {
+  header.header.portfolio-header:not(.sticky) .nav-links {
+    align-items: center; /* Для центрирования горизонтальных ссылок */
+  }
+
+  header.header.portfolio-header:not(.sticky) .nav-links a {
+    --nav-active-bg: rgba(199, 149, 106, 0.4);
+    --nav-active-color: var(--color-secondary);
+    --nav-hover-bg: rgba(199, 149, 106, 0.1);
+    --nav-hover-color: var(--color-secondary);
+    padding: var(--nav-padding-desktop-y) var(--nav-padding-desktop-x);
+    font-size: var(--nav-font-size-desktop);
+    line-height: var(--nav-line-height-desktop);
+  }
+
+  header.header.portfolio-header:not(.sticky) .nav-links a:hover {
+    background: var(--nav-hover-bg);
+    color: var(--nav-hover-color);
+  }
+
+  header.header.portfolio-header:not(.sticky) .nav-links a.active-link {
+    background: var(--nav-active-bg);
+    color: var(--nav-active-color);
+  }
+
+  header.header.portfolio-header:not(.sticky) .nav-links .active-link a {
+    color: var(--nav-active-color);
+  }
+}
+
+/*
+  Стили для кнопки "STAFF ONLY" на мобильной версии.
+*/
+header.header.portfolio-header:not(.sticky) nav.is-open .nav-links a.admin {
+  background: var(--color-secondary);
+  color: var(--color-text-on-accent);
+}
+
+header.header.portfolio-header:not(.sticky)
+  nav.is-open
+  .nav-links
+  a.admin:hover {
+  background: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+/*
+  СТИЛИ УНИКАЛЬНЫЕ ДЛЯ СТРАНИЦЫ ПОРТФОЛИО
+  (десктоп, переопределения для экранов от 768px)
+*/
+@media (min-width: 768px) {
+  /* Убираем отступы у элементов списка */
+  header.header.portfolio-header:not(.sticky) .nav-links li {
+    margin: 0;
+  }
+
+  /*
+    Стили для кнопки "STAFF ONLY" на десктопе.
+  */
+  header.header.portfolio-header:not(.sticky) .nav-links a.admin {
+    background: var(--color-secondary);
+    color: var(--color-text-on-accent);
+  }
+
+  header.header.portfolio-header:not(.sticky) .nav-links a.admin:hover {
+    background: var(--color-primary);
+    color: var(--color-secondary);
+  }
+}
+
+/* Кнопка-бургер */
+header.header.portfolio-header:not(.sticky) .nav-toggle span {
+  background: var(--burger-color);
+}

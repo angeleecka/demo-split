@@ -1,0 +1,441 @@
+/* portfolio.css */
+
+/* ===== Портфолио: общий контейнер ===== */
+.portfolio-main {
+  background-color: var(--surface-1);
+  color: var(--color-black);
+  padding-top: 120px;
+}
+.portfolio-section {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-5);
+}
+.section-title {
+  text-align: center;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+}
+
+/* ===== Хлебные крошки ===== */
+.breadcrumbs {
+  font-size: var(--fs-p);
+  margin: var(--space-2) 0 var(--space-4);
+}
+.breadcrumbs a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+.breadcrumbs a.active {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* ===== Список категорий ===== */
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+/* Карточка категории */
+.category-card {
+  display: block;
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background: var(--surface-2);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--dur-quick) var(--easing),
+    box-shadow var(--dur-quick) var(--easing);
+}
+.category-card:hover {
+  transform: translateY(var(--hover-translate-sm));
+  box-shadow: var(--shadow-card-lg);
+}
+
+/* Изображение */
+.category-card .card-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.88);
+  transition: transform var(--dur-normal) var(--easing-io),
+    filter var(--dur-normal) var(--easing-io);
+}
+.category-card:hover .card-image {
+  transform: scale(1.05);
+  filter: brightness(0.98);
+}
+
+/* Заголовок */
+.category-card .card-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-3) var(--space-4);
+  font: 600 var(--fs-p) / 1.2 var(--font-body);
+  color: var(--color-text-on-accent);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.45) 60%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+}
+
+/* ===== Галерея ===== */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+.gallery.gallery--compact {
+  grid-template-columns: repeat(auto-fit, 240px);
+  justify-content: start;
+}
+
+/* 1. Контейнер плитки: задает форму с помощью padding */
+.gallery .cell {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: var(--surface-2);
+}
+.gallery img {
+  width: 100%;
+  height: var(--gallery-img-height, 300px);
+  object-fit: cover;
+  object-position: top;
+  border-radius: var(--radius-md);
+  display: block;
+}
+/* 2. Изображение внутри: заполняет контейнер */
+.gallery .cell > img,
+.gallery .cell > video {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.gallery .cell::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+}
+.gallery .cell .meta {
+  position: absolute;
+  bottom: var(--space-2);
+  left: var(--space-3);
+  color: var(--color-text-on-accent);
+  z-index: 1;
+}
+
+/* ===== Lightbox (Media Slider) ===== */
+.mlb {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+}
+.mlb[hidden],
+.mlb[aria-hidden="true"] {
+  display: none;
+}
+
+.mlb-backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--surface-menu);
+  backdrop-filter: blur(2px) brightness(0.9);
+}
+
+.mlb-stage {
+  position: relative;
+  max-width: min(96vw, 1400px);
+  max-height: 86vh;
+  width: 96vw;
+  height: auto;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+}
+.mlb-stage img,
+.mlb-stage video {
+  max-width: 100%;
+  max-height: 86vh;
+  display: block;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.mlb-bottom {
+  position: absolute;
+  bottom: var(--space-5);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(96vw, 1400px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-icon);
+  z-index: 2;
+  font: 400 14px/1.4 var(--font-body);
+}
+.mlb-caption {
+  opacity: 0.9;
+  max-width: 70%;
+}
+.mlb-counter {
+  opacity: 0.8;
+}
+
+/* Общие кнопки */
+.mlb-btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 60px;
+  height: 120px;
+  cursor: pointer;
+  color: var(--color-text-icon);
+  z-index: 3;
+}
+
+/* Стрелки */
+.mlb-prev {
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.mlb-next {
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.mlb-btn svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.mlb-prev svg {
+  transform: translateX(-20%);
+}
+.mlb-next svg {
+  transform: translateX(20%);
+}
+.mlb-btn:hover path {
+  stroke: var(--color-primary);
+}
+
+/* Крестик */
+.mlb-close {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  line-height: 1;
+  outline: none;
+  box-shadow: none;
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+}
+.mlb-close::before,
+.mlb-close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 1.5px;
+  background-color: var(--color-text-icon);
+  transform-origin: center;
+  transition: background-color var(--dur-quick), transform var(--dur-quick);
+}
+.mlb-close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.mlb-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.mlb-close:hover::before,
+.mlb-close:hover::after {
+  background-color: var(--color-primary-600);
+  transform: translate(-50%, -50%) scale(1.1) rotate(45deg);
+}
+.mlb-close:hover::after {
+  transform: translate(-50%, -50%) scale(1.1) rotate(-45deg);
+}
+body.mlb-open {
+  overflow: hidden;
+}
+
+/* ======================== */
+/* Базовые стили для мобильных устройств */
+/* ======================== */
+.portfolio-main {
+  background-color: var(--surface-1);
+  color: var(--color-black);
+  padding-top: 120px;
+}
+.portfolio-section {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-5);
+}
+.section-title {
+  text-align: center;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+}
+
+/* ======================== */
+/* Хлебные крошки */
+/* ======================== */
+.breadcrumbs {
+  font-size: var(--fs-p);
+  margin: var(--space-2) 0 var(--space-4);
+}
+.breadcrumbs a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+.breadcrumbs a.active {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* ======================== */
+/* Список категорий */
+/* ======================== */
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+/* Карточка категории */
+.category-card {
+  display: block;
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background: var(--surface-2);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--dur-quick) var(--easing),
+    box-shadow var(--dur-quick) var(--easing);
+}
+.category-card:hover {
+  transform: translateY(var(--hover-translate-sm));
+  box-shadow: var(--shadow-card-lg);
+}
+
+/* Изображение */
+.category-card .card-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.88);
+  transition: transform var(--dur-normal) var(--easing-io),
+    filter var(--dur-normal) var(--easing-io);
+}
+.category-card:hover .card-image {
+  transform: scale(1.05);
+  filter: brightness(0.98);
+}
+
+/* Заголовок */
+.category-card .card-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-3) var(--space-4);
+  font: 600 var(--fs-p) / 1.2 var(--font-body);
+  color: var(--color-text-on-accent);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.45) 60%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+}
+
+/* ===== Галерея ===== */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+.gallery.gallery--compact {
+  grid-template-columns: repeat(auto-fit, 240px);
+  justify-content: start;
+}
+.gallery .cell {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: var(--surface-2);
+}
+.gallery img {
+  width: 100%;
+  height: var(--gallery-img-height, 300px);
+  object-fit: cover;
+  object-position: top;
+  border-radius: var(--radius-md);
+  display: block;
+}
+.gallery .cell > img,
+.gallery .cell > video {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+.gallery .cell::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+}
+.gallery .cell .meta {
+  position: absolute;
+  bottom: var(--space-2);
+  left: var(--space-3);
+  color: var(--color-text-on-accent);
+  z-index: 1;
+}

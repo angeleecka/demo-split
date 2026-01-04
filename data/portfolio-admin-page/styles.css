@@ -1,0 +1,1226 @@
+/* Базовые стили и переменные для темы (можно заменить на ваш бренд-цвет) */
+:root {
+  --bg-color: #f0f0f0;
+  --panel-bg: #ffffff;
+  --border-color: #a67c52;
+  --accent-color: #4d3323;
+  --hover-bg: #a67c52;
+  --select-bg: #a67c52;
+  --text-color: #1c1c1c;
+}
+
+.file-manager-container {
+  display: flex;
+  flex-direction: column;
+
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+
+  /* *** КОРРЕКТИРОВКА ШИРИНЫ *** */
+  width: 100%; /* Устанавливаем 100% ширины, чтобы он заполнил родителя */
+  /* max-width: 1400px; - УДАЛИТЬ или изменить, если эта граница мешает */
+
+  height: calc(100vh - 40px); /* Высота остается для вертикального растяжения */
+  margin: 0; /* Убираем auto margin, если он остался */
+
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  overflow: hidden;
+}
+
+.file-manager-header {
+  padding: 15px 20px;
+  background-color: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.file-manager-main {
+  flex-grow: 1;
+  display: flex;
+  overflow: hidden; /* Важно для скроллинга внутри панелей */
+  width: 100%;
+}
+
+/* --- Панели (Левая/Правая) --- */
+
+.panel {
+  transition: border-color 0.2s, box-shadow 0.2s;
+  /*border: 1px solid var(--border-color);  */
+  box-sizing: border-box;
+  background-color: var(--panel-bg);
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Для корректного сжатия flex-элементов */
+  height: 100%;
+}
+
+.panel.active {
+  border-color: var(--color-secondary, #4d3323); /* Яркий акцентный цвет */
+  box-shadow: 0 0 5px var(--shadow-card);
+  z-index: 10; /* Чтобы рамка не "пряталась" за другими панелями */
+}
+
+.left-panel {
+  flex-basis: 250px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-color);
+}
+
+/* При активации левая панель получает класс active, и ей нужна полная рамка */
+.left-panel.active {
+  border: 1px solid var(--accent-color) !important;
+}
+
+.right-panel {
+  flex-grow: 1;
+}
+
+.panel-header {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-color);
+
+  /* “жёсткая подложка” */
+  background-color: var(--header-bg);
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  /* ❗ главное: НЕ режем крошки */
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.panel-header-title {
+  font-size: 0.95em;
+  font-weight: 600;
+}
+
+/* крошки: если длинные — пусть можно проскроллить, а не обрезать */
+.panel-header-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  min-width: 0;
+}
+
+/* Breadcrumbs: делаем горизонтальный скроллбар тоньше (перебиваем общий height: 8px) */
+.panel-header-breadcrumbs::-webkit-scrollbar {
+  height: 2px;
+}
+
+.panel-header-breadcrumbs::-webkit-scrollbar-thumb {
+  border: 0 !important; /* важно: иначе "толстеет" из-за глобальной рамки */
+  border-radius: 999px;
+}
+
+.breadcrumb-link {
+  cursor: pointer;
+  /* Используем акцентный цвет для ссылок */
+  color: var(--color-secondary, #4d3323);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-link:hover {
+  text-decoration: underline; /* Подчеркивание при наведении */
+}
+
+.breadcrumb-separator {
+  color: #999; /* Серый разделитель */
+  margin: 0 4px;
+}
+
+.breadcrumb-current {
+  font-weight: bold; /* Текущая папка */
+  color: inherit; /* Цвет текста родительского контейнера */
+}
+
+.panel-content {
+  flex-grow: 1;
+  overflow-y: auto; /* Скролл внутри контента панели */
+  padding: 5px 0;
+}
+
+/* --- Режимы разделения (Total Commander-стиль) --- */
+
+/* Вертикальное разделение (по умолчанию) */
+.file-manager-main.vertical-split {
+  flex-direction: row;
+}
+
+/* Убедимся, что граница активного окна выглядит корректно */
+.file-manager-main.vertical-split .right-panel.active {
+  border-right: 1px solid var(--color-secondary, #4d3323) !important;
+}
+
+.file-manager-main.horizontal-split .right-panel.active {
+  border-right: 1px solid var(--accent-color) !important;
+  border-bottom-color: var(--accent-color) !important;
+}
+
+/* Вертикальное разделение (Дерево + Две колонки) */
+
+.file-manager-main.vertical-split .list-panels-container {
+  flex-direction: row; /* Две панели списка делятся по горизонтали */
+}
+
+.file-manager-main.vertical-split .left-panel {
+  flex-basis: 250px; /* Фиксированная ширина для дерева */
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-color);
+}
+
+.file-manager-main.vertical-split #list-panel-1 {
+  border-right: 1px solid var(--border-color);
+}
+
+/* Горизонтальное разделение (Дерево + Два ряда списков) */
+.file-manager-main.horizontal-split {
+  /* Основной контейнер остается по умолчанию (row) */
+  flex-direction: row;
+}
+
+.file-manager-main.horizontal-split .list-panels-container {
+  flex-direction: column; /* Две панели списка делятся по вертикали */
+  border-right: 1px solid var(--border-color);
+}
+.file-manager-main.horizontal-split .left-panel {
+  /* Сохраняем фиксированную ширину и вертикальные границы */
+  flex-basis: 250px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-color);
+}
+.file-manager-main.horizontal-split .right-panel {
+  width: 100%;
+  height: 50%; /* Делят оставшееся вертикальное пространство */
+  border-right: none;
+  border-bottom: 1px solid var(--border-color); /* Разделитель между двумя списками */
+}
+
+.file-manager-main.horizontal-split #list-panel-2 {
+  border-bottom: none; /* Убираем нижнюю границу у последнего элемента */
+}
+
+/* --- Стили дерева (левая панель) --- */
+.tree-root {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tree-item {
+  padding: 3px 0;
+  cursor: pointer;
+
+  line-height: 1.5;
+}
+
+.folder-name {
+  display: flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+.folder-name:hover {
+  background-color: var(--hover-bg);
+}
+
+.tree-item.selected > .folder-name {
+  background-color: var(--select-bg);
+  border: 1px solid var(--accent-color);
+  color: var(--font-color); /* Сохраняем цвет шрифта для читаемости */
+}
+
+/* --- Стили Списка Файлов (Правая панель - Режим Строки/Таблица) --- */
+.file-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.file-list-table th,
+.file-list-table td {
+  padding: 8px 15px; /* Увеличиваем паддинг для отступов */
+  text-align: left;
+  /* Делаем границы столбцов видимыми */
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none; /* Добавлено ранее, важно для ресайза */
+}
+
+/* Убираем правую границу у последнего столбца */
+.file-list-table th:last-child,
+.file-list-table td:last-child {
+  border-right: none;
+}
+
+.file-list-table th {
+  font-weight: 600;
+  cursor: pointer;
+  position: relative; /* КРИТИЧЕСКИ ВАЖНО для позиционирования ручки ресайза */
+
+  background-color: var(--header-bg);
+}
+
+/* Индикатор сортировки (как в Проводнике) */
+.file-list-table th.sort-asc::after {
+  content: " ▲";
+  font-size: 0.8em;
+  opacity: 0.6;
+}
+.file-list-table th.sort-desc::after {
+  content: " ▼";
+  font-size: 0.8em;
+  opacity: 0.6;
+}
+
+/* Граница между строками */
+.file-row {
+  transition: background-color 0.1s;
+  cursor: default;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.file-row:hover {
+  background-color: var(--hover-bg);
+}
+
+.file-row.selected {
+  background-color: var(--select-bg);
+  /* border: 1px solid var(--accent-color);*/
+}
+
+.file-name {
+  display: flex;
+  align-items: center;
+}
+
+.file-name .icon {
+  /* Обеспечиваем отступ между иконкой и текстом */
+  margin-left: 8px;
+}
+
+/* --- Нижний Туулбар --- */
+.file-manager-footer {
+  display: flex;
+  justify-content: flex-start;
+  border-top: 1px solid var(--border-color);
+  gap: 10px;
+  padding: 10px 20px;
+  background-color: var(--header-bg);
+}
+
+.toolbar-btn {
+  padding: 5px 10px;
+
+  cursor: pointer;
+
+  background: none;
+  border: none;
+  color: var(--font-color);
+
+  margin-right: 5px;
+
+  border-radius: 4px;
+  transition: background-color 0.1s;
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-btn:hover {
+  background-color: var(--hover-bg);
+  border-color: var(--accent-color);
+}
+
+.toolbar-btn.active {
+  border-color: var(--accent-color);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+.toolbar-separator {
+  display: inline-block; /* Убеждаемся, что они видны */
+  padding: 0 10px; /* Добавляем небольшие отступы */
+  color: #4d3323; /* Для видимости */
+}
+
+/* Action buttons in footer: icon + text on desktop, icon-only on mobile */
+#toolbar .toolbar-action {
+  gap: 8px;
+  white-space: nowrap;
+}
+
+@media (max-width: 500px) {
+  #toolbar {
+    gap: 6px;
+    padding: 8px 10px;
+    flex-wrap: nowrap; /* держим один ряд */
+  }
+
+  #toolbar .toolbar-action .btn-text {
+    display: none; /* на мобиле только иконки */
+  }
+
+  #toolbar .toolbar-btn {
+    padding: 6px 8px; /* ужимаем кнопки */
+  }
+
+  .file-manager-footer {
+    justify-content: center;
+  }
+}
+
+/* --- Контекстное меню --- */
+.context-menu {
+  /* position: absolute;*/
+  border: 1px solid var(--border-color);
+  z-index: 99999;
+  overflow: hidden;
+  background-color: var(--context-menu-bg);
+  border-radius: 4px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  min-width: 180px;
+
+  position: fixed;
+}
+
+.context-menu ul {
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+}
+
+.context-menu li {
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.1s;
+  color: var(--font-color);
+}
+
+.context-menu li:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Windows-style: label слева, хоткей справа */
+.context-menu li:not(.separator) {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 18px;
+  white-space: nowrap;
+}
+
+.context-menu .cm-hotkey {
+  opacity: 0.65;
+  font-size: 0.85em;
+}
+
+/*
+.context-menu .separator {
+  height: 1px;
+  background-color: #eee;
+  padding: 0;
+  margin: 4px 0;
+}*/
+
+.hidden {
+  display: none !important;
+}
+
+/* Добавьте стили для плиточного вида (.file-list-grid) и модального окна (.modal-backdrop) */
+/* --- Стили Списка Файлов (Правая панель - Режим Плитки) --- */
+
+.file-list-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Промежутки между плитками */
+  padding: 10px;
+  align-content: flex-start; /* Удерживает плитки вверху */
+}
+
+.file-tile {
+  width: 100px; /* Фиксированная ширина плитки */
+  height: 100px; /* Фиксированная высота плитки */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-align: center;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  transition: background-color 0.1s, border-color 0.1s;
+}
+
+.file-tile:hover {
+  background-color: var(--hover-bg);
+  border-color: var(--accent-color);
+}
+
+.file-tile.selected {
+  background-color: var(--select-bg);
+  border-color: var(--accent-color);
+}
+
+.file-tile .icon {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 5px;
+  background-color: var(--accent-color); /* Для демонстрации */
+}
+
+.file-tile .tile-name {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; /* Обрезаем длинные имена */
+  font-size: 0.85em;
+  margin-top: 5px;
+}
+
+/* --- Стиль для поля ввода переименования --- */
+
+.rename-input {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--accent-color);
+  box-sizing: border-box;
+  font-size: inherit; /* Используем тот же размер шрифта, что и в таблице/плитке */
+  font-family: inherit;
+  background-color: var(--bg-secondary);
+  color: var(--font-color);
+}
+
+/* В табличном режиме нужно, чтобы инпут занимал всю доступную ширину td */
+.file-list-table .file-name {
+  /* Важно! Для корректной работы инпута внутри td */
+  padding-left: 8px; /* можно 6–10px */
+  /* Добавляем флекс, чтобы иконка не мешала инпуту */
+  display: flex;
+  align-items: center;
+}
+
+.file-list-table .file-name .rename-input {
+  padding: 5px;
+  border-radius: 3px;
+  flex: 1 1 auto;
+  min-width: 0; /* важно для flex, чтобы не раздувало */
+  margin-left: 8px; /* вместо отрицательного */
+}
+
+/* ==========================================================
+   СТИЛИ FILE MANAGER (ПРЕМИАЛЬНЫЙ ВИД)
+   ========================================================== */
+
+/* 1. Глобальные CSS-переменные для ТЕМ */
+
+:root {
+  /* --- Светлая тема (Light Theme) --- */
+  --font-color: #333; /* Основной текст */
+  --bg-primary: #f8f9fa; /* Основной фон страницы */
+  --bg-secondary: #ffffff; /* Фон панелей (Дерево/Список) */
+  --header-bg: rgba(199, 149, 106, 0.4); /* Фон заголовков и тулбара */
+  --border-color: #dee2e6; /* Границы и разделители */
+  --accent-color: #4d3323; /* Акцентный синий (выделение, кнопки) */
+  /* --accent-color: #007bff;  Акцентный синий (выделение, кнопки) */
+  --hover-bg: rgba(199, 149, 106, 0.4); /* Фон при наведении */
+  --select-bg: rgba(199, 149, 106, 0.4); /* Фон выделенного элемента */
+  --context-menu-bg: #ffffff; /* Фон контекстного меню */
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme {
+  /* --- Темная тема (Dark Theme) --- */
+  --font-color: #e9ecef; /* Основной текст */
+  --bg-primary: #212529; /* Основной фон страницы */
+  --bg-secondary: #2c3034; /* Фон панелей */
+  --header-bg: #343a40; /* Фон заголовков и тулбара */
+  --border-color: #495057; /* Границы и разделители */
+  --accent-color: #4da6ff; /* Более светлый акцентный синий */
+  --hover-bg: #3b4045; /* Фон при наведении */
+  --select-bg: #004085; /* Фон выделенного элемента */
+  --context-menu-bg: #343a40; /* Фон контекстного меню */
+  --shadow-color: rgba(0, 0, 0, 0.4);
+}
+
+/* 2. Общие стили контейнеров */
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-primary);
+  color: var(--font-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+/* 3. Основной макет (Flexbox) */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid transparent; /* Базовый, чтобы active его не смещал */
+  box-sizing: border-box;
+  min-width: 0; /* Важно для flexbox */
+}
+
+/* 4. Режимы разделения (Исправлено, как обсуждали) */
+
+.list-panels-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Вертикальное разделение (Дерево 250px + Списки) */
+
+.file-manager-main.vertical-split .right-panel {
+  flex-grow: 1;
+  width: 50%;
+  border-right: 1px solid var(--border-color);
+}
+.file-manager-main.vertical-split #list-panel-2 {
+  border-right: none;
+}
+.file-manager-main .left-panel {
+  flex-basis: 250px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-color);
+}
+
+/* 5. Стили Дерева Папок (FileTree) */
+
+#file-tree {
+  padding: 10px 0;
+}
+
+.tree-root,
+.tree-children {
+  list-style: none;
+  padding-left: 15px;
+  margin: 0;
+}
+
+.tree-root {
+  padding-left: 0;
+}
+
+.tree-item .folder-name {
+  display: block;
+  padding: 2px 10px;
+  border-radius: 3px;
+  user-select: none;
+  transition: background-color 0.1s;
+}
+
+.tree-item .folder-name:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Активная (выбранная) папка в дереве */
+.tree-item.selected > .folder-name-wrapper > .folder-name,
+.tree-item.selected > .folder-name {
+  background-color: var(--select-bg);
+}
+
+/* 9. Стили Иконок (Временные) */
+
+.icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  border-radius: 2px;
+}
+
+.folder-icon {
+  background-color: orange;
+}
+
+.file-icon {
+  background-color: var(--color-accent-brown);
+}
+
+.folder-up-icon {
+  background-color: grey;
+}
+
+.video-icon {
+  background-color: #28a745; /* временно, потом покрасим по-дизайнерски */
+}
+
+.vertical-split-icon,
+.horizontal-split-icon {
+  background-color: #6c757d;
+}
+
+.toolbar-btn.active .vertical-split-icon,
+.toolbar-btn.active .horizontal-split-icon {
+  background-color: #fff;
+}
+
+.single-pane-icon {
+  background-color: #6c757d;
+}
+.toolbar-btn.active .single-pane-icon {
+  background-color: #fff;
+}
+
+/* 10. Стили Контекстного Меню и Модального Окна (Улучшено) */
+/*
+.context-menu li.separator {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 5px 0;
+  padding: 0;
+  cursor: default;
+}
+.context-menu li.separator:hover {
+  background-color: var(--border-color);
+}*/
+
+/* --- Стили для ресайза колонок --- */
+
+.resize-handle {
+  position: absolute;
+  right: -2px; /* Чуть-чуть сдвигаем вправо, чтобы не перекрывать border-right */
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  cursor: col-resize;
+  z-index: 5;
+  /* Визуальный индикатор (можно убрать, если не нужен, но помогает UX) */
+  background-color: transparent;
+  transition: background-color 0.2s;
+}
+
+.resize-handle:hover {
+  /* Подсвечиваем при наведении */
+  background-color: rgba(0, 123, 255, 0.3);
+}
+
+/* Стиль для предотвращения выделения текста во время перетаскивания */
+body.resizing {
+  cursor: col-resize;
+  user-select: none;
+}
+/* Внутреннее содержимое панелей в файловом менеджере */
+.file-manager-main .panel .panel-content {
+  flex: 1 1 auto;
+  min-height: 0; /* важно для корректного сжатия во flex-контейнере */
+  overflow-y: auto; /* скроллим именно внутренний контент */
+}
+/* Пример CSS для стилизации встроенных SVG */
+.file-list-table td.file-name {
+  display: flex; /* Чтобы SVG и текст были в одну линию */
+  align-items: center;
+}
+
+.file-list-table td.file-name svg {
+  margin-right: 8px; /* Отступ между иконкой и именем */
+  /* width: 18px; /* Ширина задана в самом SVG, но можно переопределить */
+  /* height: 18px; */
+  flex-shrink: 0; /* Чтобы SVG не сжимался */
+  margin-left: 10px;
+}
+
+/* 1. Скрытие дочерних элементов */
+.tree-item > .tree-children {
+  /* Дочерний список по умолчанию скрыт */
+  display: none;
+}
+
+/* Раскрытие дочерних элементов, когда родитель имеет класс 'expanded' */
+.tree-item.expanded > .tree-children {
+  display: block;
+}
+
+/* 2. Отступы для вложенности */
+.tree-children {
+  /* Добавляем отступ для вложенных папок */
+  padding-left: 20px;
+}
+
+/* 3. Оформление элемента папки */
+
+.folder-name-wrapper {
+  display: flex; /* Выравнивание иконки, шеврона и текста */
+  align-items: center;
+  padding: 2px 0;
+}
+
+/* 4. Стилизация Chevron (Треугольника) */
+.chevron-toggle {
+  margin-right: 4px;
+  width: 16px; /* Фиксируем ширину для всех toggle, чтобы текст не прыгал */
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chevron-toggle svg {
+  /* Используем CSS-переход для красивой анимации */
+  transition: transform 0.2s ease;
+  transform: rotate(0deg); /* Изначально смотрит вправо */
+}
+
+/* Поворот шеврона, когда папка РАСКРЫТА */
+.tree-item.expanded .chevron-toggle svg {
+  transform: rotate(90deg); /* Поворот на 90 градусов (смотрит вниз) */
+}
+
+/* Скрываем шеврон, если папка не имеет детей (класс is-collapsible) */
+.tree-item:not(.is-collapsible) .chevron-toggle {
+  visibility: hidden;
+  /* Но сохраняем пустое место, чтобы имена папок были выровнены */
+}
+
+/* =========================
+   Scrollbar (тонкий, в тон UI)
+   ========================= */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(120, 70, 40, 0.55) rgba(0, 0, 0, 0.08);
+}
+
+/* Chrome / Edge / Safari */
+*::-webkit-scrollbar {
+  width: 2px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(120, 70, 40, 0.55);
+  border-radius: 50%;
+  /* border: 2px solid rgba(0, 0, 0, 0.08);*/
+  width: 2px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 70, 40, 0.75);
+}
+
+/* =========================
+   Confirm modal (custom)
+   ========================= */
+
+.confirm-modal.hidden {
+  display: none;
+}
+
+.confirm-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.confirm-card {
+  width: min(520px, 100%);
+  border-radius: 16px;
+  padding: 16px 16px 14px;
+
+  background: rgba(25, 18, 12, 0.96);
+  border: 1px solid rgba(255, 215, 140, 0.25);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.confirm-title {
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.2px;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.confirm-text {
+  font-size: 14px;
+  line-height: 1.45;
+  margin-bottom: 14px;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* Кнопки модалки (универсально, можно потом переиспользовать) */
+.confirm-actions .btn {
+  appearance: none;
+  border: 1px solid rgba(255, 215, 140, 0.22);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.9);
+
+  transition: transform 0.06s ease, background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.confirm-actions .btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 215, 140, 0.35);
+}
+
+.confirm-actions .btn:active {
+  transform: translateY(1px);
+}
+
+.confirm-actions .btn:focus-visible {
+  outline: 2px solid rgba(255, 215, 140, 0.55);
+  outline-offset: 2px;
+}
+
+.confirm-actions .btn.secondary {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.confirm-actions .btn.danger {
+  background: rgba(166, 124, 82, 0.28);
+  border-color: rgba(166, 124, 82, 0.55);
+}
+
+.confirm-actions .btn.danger:hover {
+  background: rgba(166, 124, 82, 0.38);
+}
+
+/* Подсветка строки/плитки, пока открыто контекстное меню */
+.context-selected {
+  outline: 2px solid rgba(255, 215, 140, 0.55);
+  outline-offset: -2px;
+  background: rgba(255, 215, 140, 0.1);
+}
+
+/* ===============================
+   File Manager: Preview in active panel
+   vertical-split => bottom
+   horizontal-split => right
+   =============================== */
+
+.file-manager-container .panel-body {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.file-manager-container .panel-body > .panel-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* default / horizontal => preview справа */
+.file-manager-main:not(.vertical-split) .panel-body {
+  flex-direction: row;
+}
+
+/* vertical => preview снизу */
+.file-manager-main.vertical-split .panel-body {
+  flex-direction: column;
+}
+
+.file-manager-container .preview-pane.fm-preview[hidden] {
+  display: none !important;
+}
+
+.file-manager-container .preview-pane.fm-preview {
+  /* IMPORTANT: override legacy previewPane CSS (if any) */
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-secondary);
+
+  min-width: 260px;
+  min-height: 180px;
+  overflow: hidden;
+  border-left: 1px solid var(--border-color);
+}
+
+/* растягиваем внутренности, чтобы картинка/видео реально имели высоту */
+.file-manager-container .preview-pane.fm-preview .preview-body,
+.file-manager-container .preview-pane.fm-preview .preview-media {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.file-manager-container .preview-pane.fm-preview .preview-media {
+  position: relative;
+}
+
+/* Close button — тонкий крестик без фона */
+.file-manager-container .preview-pane.fm-preview .close-btn {
+  all: unset;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  z-index: 60;
+  display: block;
+}
+
+.file-manager-container .preview-pane.fm-preview .close-btn::before,
+.file-manager-container .preview-pane.fm-preview .close-btn::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 80%;
+  width: 34px;
+  height: 2px;
+  background: var(--border-color);
+  transform-origin: center;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.file-manager-container .preview-pane.fm-preview .close-btn::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.file-manager-container .preview-pane.fm-preview .close-btn::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.file-manager-container .preview-pane.fm-preview .close-btn:hover::before,
+.file-manager-container .preview-pane.fm-preview .close-btn:hover::after {
+  background: #d14;
+  transform: translate(-50%, -50%) scale(1.08) rotate(45deg);
+}
+
+.file-manager-container .preview-pane.fm-preview .close-btn:hover::after {
+  transform: translate(-50%, -50%) scale(1.08) rotate(-45deg);
+}
+
+.file-manager-container .preview-pane.fm-preview .close-btn:focus-visible {
+  outline: 2px solid var(--border-color);
+  outline-offset: 4px;
+}
+
+.file-manager-container .preview-pane.fm-preview .preview-error {
+  padding: 10px;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* в вертикальном сплите — граница сверху и фикс по высоте */
+.file-manager-main.vertical-split .preview-pane.fm-preview {
+  border-left: none;
+  border-top: 1px solid var(--border-color);
+  flex: 0 0 38%;
+}
+
+/* в горизонтальном/обычном — справа */
+.file-manager-main:not(.vertical-split) .preview-pane.fm-preview {
+  flex: 0 0 38%;
+}
+
+.file-manager-container .preview-pane.fm-preview img,
+.file-manager-container .preview-pane.fm-preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* =========================================================
+   Tiles view: folder icons + image thumbnails (Explorer-like)
+   ========================================================= */
+
+.file-tile {
+  width: 120px;
+  height: 130px;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 10px;
+}
+
+.file-tile .tile-visual {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-tile .tile-thumb-image {
+  width: 92px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+}
+
+.file-tile .tile-thumb-image {
+  pointer-events: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+.file-tile .tile-ico {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.file-tile .tile-ico-folder {
+  font-size: 3.2rem;
+  color: var(--accent-color);
+}
+
+.file-tile .tile-ico-up {
+  font-size: 2.8rem;
+  opacity: 0.75;
+}
+
+.file-tile .tile-ico-video {
+  color: #28a745;
+}
+
+.file-tile .tile-ico-file {
+  opacity: 0.85;
+}
+
+.file-tile .tile-name {
+  margin-top: auto;
+  font-size: 0.82em;
+  line-height: 1.1;
+}
+
+/* DnD подсветка цели и “тащу” */
+.fm-dnd-drop-target {
+  outline: 2px dashed var(--accent-color);
+  outline-offset: -3px;
+}
+
+.fm-dnd-dragging {
+  opacity: 0.65;
+}
+
+.drop-target {
+  outline: 2px dashed var(--border-color);
+  outline-offset: -3px;
+}
+.dragging {
+  opacity: 0.65;
+}
+
+@media (max-width: 420px) {
+  #toolbar .toolbar-separator {
+    display: none; /* если тесно — убираем разделители */
+  }
+}
+
+/* Lightbox must be above header/mobile menu */
+#mediaLightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+}
+
+#mediaLightbox .mlb-btn {
+  z-index: 100001;
+}
+*/
+
+/* Пока открыт лайтбокс — хедер не кликается (иначе бургер перехватывает) */ 
+body.mlb-open header {
+  pointer-events: none;
+}
+
+/* Пока открыт лайтбокс — прячем шапку/бургер визуально */
+body.mlb-open header,
+body.mlb-open .burger,
+body.mlb-open #burgerBtn {
+  visibility: hidden !important;
+}
+
+/* Mobile: центрируем ряды плиток, чтобы не было перекоса вправо */
+@media (max-width: 900px) {
+  .file-list-grid {
+    justify-content: center;
+  }
+}
+
+/* FM: прямоугольное выделение */
+.fm-marquee {
+  position: absolute;
+  pointer-events: none;
+  border: 1px dashed rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  z-index: 50;
+}
+
+/* Touch DnD (mobile) */
+body.fm-touch-dnd {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.fm-touch-ghost {
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: translate(-9999px, -9999px);
+  pointer-events: none;
+  z-index: 2147483647;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(30, 30, 30, 0.75);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+  backdrop-filter: blur(6px);
+}

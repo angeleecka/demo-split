@@ -1,0 +1,306 @@
+/* main-styles.css */
+
+/* ================================
+   Сбросы и базовые стили
+================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  line-height: var(--lh-base);
+  color: var(--color-text-body);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ================================
+   Header / Nav / Burger
+================================ */
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Используем переменные */
+  padding: var(--header-padding);
+  background: none;
+}
+
+/* липкий */
+.header.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(
+    --surface-sticky
+  ) !important; /* Используем семантическую переменную */
+  padding: var(
+    --header-padding-sticky
+  ); /* Новая переменная для липкого заголовка */
+  box-shadow: var(--shadow-sticky); /* Используем переменную для тени */
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform var(--dur-normal) var(--easing-io),
+    opacity var(--dur-normal) var(--easing-io);
+  z-index: 999;
+}
+.header.sticky .nav-toggle span {
+  background: var(--color-text-icon, #fff) !important;
+}
+.header.sticky.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.header.sticky::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-border-size); /* Задаём переменную для высоты */
+  z-index: 1;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-primary),
+    var(--color-primary) var(--stripe-thickness),
+    /* Задаём переменную для полосы */ transparent var(--stripe-thickness),
+    transparent calc(var(--stripe-thickness) * 2)
+      /* Используем calc() для поддержания пропорций */
+  );
+}
+
+/* ========================
+   1. Меню (выпадающее)
+======================== */
+header nav {
+  position: absolute;
+  top: var(--menu-top-offset); /* Используем переменные из :root */
+  right: var(--menu-right-offset-2);
+  width: var(--menu-width);
+  background: var(--surface-menu);
+  padding: var(--menu-padding-top) 0 0 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity var(--dur-quick) var(--easing),
+    transform var(--dur-quick) var(--easing);
+}
+
+header nav.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Ссылки в меню */
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+
+  align-items: stretch; /* Гарантируем центрирование всех элементов */
+}
+
+.nav-links li {
+  margin: 0;
+  border-bottom: 1px solid var(--color-primary);
+}
+
+.nav-links li:last-child {
+  border-bottom: none;
+}
+
+.nav-links a {
+  display: block;
+  padding: var(--nav-padding-desktop-y) var(--nav-padding-desktop-x);
+  font-size: var(--fs-nav-link);
+  line-height: var(--nav-line-height-mobile); /* Переменная для мобильного */
+  color: var(--color-primary);
+  font-weight: var(--nav-font-weight);
+  text-decoration: none;
+  transition: all var(--dur-quick) var(--easing);
+}
+
+.nav-links a:hover {
+  background: var(--nav-hover-bg);
+  color: var(--nav-hover-color);
+}
+
+.active-link a {
+  color: var(--nav-active-color);
+  border-left: var(--nav-border-active); /* Используем переменную из :root */
+  background: var(--nav-active-bg);
+}
+
+@media (orientation: landscape) {
+  .nav-links a {
+    /* Переменные для ландшафтной ориентации */
+    padding: var(--nav-padding-landscape-y) var(--nav-padding-landscape-x);
+    font-size: var(--nav-font-size-landscape);
+  }
+}
+
+/* ========================
+   Кнопка-бургер/крестик
+======================== */
+.nav-toggle {
+  position: relative;
+  width: var(--burger-size); /* Используем переменную */
+  height: var(--burger-size);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--burger-gap); /* Переменная для зазора */
+  outline: none;
+}
+
+/* Линии */
+.nav-toggle span {
+  display: block;
+  width: var(--burger-line-width); /* Переменная для ширины */
+  height: var(--burger-line-height); /* Переменная для высоты */
+  background: var(--color-text-icon);
+  border-radius: 2px;
+  transition: transform var(--dur-quick) var(--easing),
+    opacity var(--dur-quick) var(--easing);
+}
+
+/* Анимация превращения в крестик */
+.nav-toggle.open span:nth-child(1) {
+  /* Используем calc() для точного позиционирования */
+  transform: translateY(calc(var(--burger-gap) + var(--burger-line-height)))
+    rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(
+      calc(calc(var(--burger-gap) + var(--burger-line-height)) * -1)
+    )
+    rotate(-45deg);
+}
+
+/* Для липкого хедера */
+.header.sticky .nav-toggle {
+  background: var(--color-primary);
+  border-radius: var(--radius-lg); /* Используем переменную */
+  box-shadow: var(--shadow-md); /* Используем переменную */
+  position: absolute;
+  right: var(--burger-sticky-right);
+  bottom: var(--burger-sticky-bottom);
+}
+
+.header.sticky .nav-toggle.open {
+  background: none;
+  box-shadow: none;
+  top: var(--burger-open-top);
+  right: var(--burger-open-right);
+  bottom: auto;
+}
+
+.nav-toggle:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-style: normal;
+  font-size: var(--logo-font-size);
+  color: var(--color-text-icon);
+}
+
+/* ================================
+   Media queries
+================================ */
+/* Здесь мы используем существующие переменные,
+   чтобы сохранить DRY (Don't Repeat Yourself) */
+
+/* планшет */
+@media (min-width: 768px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  .header {
+    background-color: var(--surface-hero-overlay); /* Используем переменную */
+    backdrop-filter: blur(2px);
+  }
+
+  header nav {
+    position: static;
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    background: transparent;
+    padding: 0;
+  }
+
+  .nav-links {
+    flex-direction: row;
+    gap: var(--nav-gap-desktop);
+  }
+
+  .nav-links li {
+    border: none;
+    margin: var(--space-2) 0; /* Используем переменную */
+  }
+
+  .nav-links li a {
+    padding: var(--nav-padding-desktop-y) var(--nav-padding-desktop-x);
+    font-size: var(--nav-font-size-desktop);
+    line-height: var(--nav-line-height-desktop);
+  }
+}
+
+/* десктоп */
+@media (min-width: 1200px) {
+  .hero-title {
+    font-size: var(--fs-h2); /* Используем переменную для заголовка */
+  }
+}
+
+/* i18n wrappers should be layout-neutral */
+[data-i18n] {
+  display: contents; /* “растворяет” обёртку, оставляя только текст */
+}

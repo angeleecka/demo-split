@@ -1,0 +1,584 @@
+{
+  "Открыть меню": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 0,
+      "column": 0,
+      "kind": "html:attr:aria-label"
+    }
+  ],
+  "Панель управления": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 2003,
+      "column": 0,
+      "kind": "html:text"
+    }
+  ],
+  "⚠️ Перед созданием папки или файла убедитесь, что вы в находитесь в правильном разделе.": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 2067,
+      "column": 0,
+      "kind": "html:text"
+    }
+  ],
+  "Создать / Загрузить": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 2273,
+      "column": 0,
+      "kind": "html:text"
+    }
+  ],
+  "Введите имя папки": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 0,
+      "column": 0,
+      "kind": "html:attr:placeholder"
+    }
+  ],
+  "Создать папку": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 2483,
+      "column": 0,
+      "kind": "html:text"
+    }
+  ],
+  "Загрузить": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 2617,
+      "column": 0,
+      "kind": "html:text"
+    }
+  ],
+  "Переименовать": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 2746,
+      "column": 0,
+      "kind": "html:text"
+    },
+    {
+      "file": "admin-portfolio.html",
+      "line": 3036,
+      "column": 0,
+      "kind": "html:text"
+    }
+  ],
+  "Старое имя папки/файла": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 0,
+      "column": 0,
+      "kind": "html:attr:placeholder"
+    }
+  ],
+  "Новое имя папки/файла": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 0,
+      "column": 0,
+      "kind": "html:attr:placeholder"
+    }
+  ],
+  "Удалить": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 3168,
+      "column": 0,
+      "kind": "html:text"
+    },
+    {
+      "file": "admin-portfolio.html",
+      "line": 3363,
+      "column": 0,
+      "kind": "html:text"
+    }
+  ],
+  "Введите имя папки/файла": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 0,
+      "column": 0,
+      "kind": "html:attr:placeholder"
+    }
+  ],
+  "Восстановить": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 3414,
+      "column": 0,
+      "kind": "html:text"
+    }
+  ],
+  "Открыть панель": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 0,
+      "column": 0,
+      "kind": "html:attr:aria-label"
+    }
+  ],
+  "Закрыть": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 0,
+      "column": 0,
+      "kind": "html:attr:aria-label"
+    }
+  ],
+  "Не удалось загрузить изображение": [
+    {
+      "file": "admin-portfolio.html",
+      "line": 5146,
+      "column": 0,
+      "kind": "html:text"
+    }
+  ],
+  "🔄 Первая генерация portfolio.json...": [
+    {
+      "file": "app.js",
+      "line": 34,
+      "column": 16,
+      "kind": "js:string"
+    }
+  ],
+  "❌ Ошибка при первой генерации JSON:": [
+    {
+      "file": "app.js",
+      "line": 37,
+      "column": 18,
+      "kind": "js:string"
+    }
+  ],
+  "✅ portfolio.json обновлён автоматически": [
+    {
+      "file": "app.js",
+      "line": 51,
+      "column": 16,
+      "kind": "js:string"
+    }
+  ],
+  "❌ Ошибка при обновлении JSON:": [
+    {
+      "file": "app.js",
+      "line": 53,
+      "column": 18,
+      "kind": "js:string"
+    }
+  ],
+  "Римский образ": [
+    {
+      "file": "index.html",
+      "line": 0,
+      "column": 0,
+      "kind": "html:attr:alt"
+    }
+  ],
+  "Образ в стиле Гэтсби": [
+    {
+      "file": "index.html",
+      "line": 0,
+      "column": 0,
+      "kind": "html:attr:alt"
+    }
+  ],
+  "Египетский образ": [
+    {
+      "file": "index.html",
+      "line": 0,
+      "column": 0,
+      "kind": "html:attr:alt"
+    }
+  ],
+  "О нас": [
+    {
+      "file": "index.html",
+      "line": 0,
+      "column": 0,
+      "kind": "html:attr:alt"
+    }
+  ],
+  "Отменить": [
+    {
+      "file": "js\\admin-actions.js",
+      "line": 181,
+      "column": 6,
+      "kind": "js:string"
+    }
+  ],
+  "❌ Папка не найдена": [
+    {
+      "file": "js\\admin-portfolio — копия.js",
+      "line": 154,
+      "column": 30,
+      "kind": "js:string"
+    },
+    {
+      "file": "js\\admin-portfolio.js",
+      "line": 156,
+      "column": 30,
+      "kind": "js:string"
+    }
+  ],
+  "Ошибка загрузки JSON:": [
+    {
+      "file": "js\\admin-portfolio — копия.js",
+      "line": 259,
+      "column": 18,
+      "kind": "js:string"
+    },
+    {
+      "file": "js\\admin-portfolio.js",
+      "line": 261,
+      "column": 18,
+      "kind": "js:string"
+    }
+  ],
+  "Введите название папки!": [
+    {
+      "file": "js\\admin-ui.js",
+      "line": 94,
+      "column": 32,
+      "kind": "js:string"
+    }
+  ],
+  "Название папки не должно содержать символы: / \\ : * ? \" < > | и точку (.).": [
+    {
+      "file": "js\\admin-ui.js",
+      "line": 99,
+      "column": 8,
+      "kind": "js:string"
+    }
+  ],
+  "Выберите файл!": [
+    {
+      "file": "js\\admin-ui.js",
+      "line": 115,
+      "column": 50,
+      "kind": "js:string"
+    }
+  ],
+  "Укажите имена!": [
+    {
+      "file": "js\\admin-ui.js",
+      "line": 123,
+      "column": 47,
+      "kind": "js:string"
+    }
+  ],
+  "Новое имя содержит запрещенные символы: / \\ : * ? \" < > |": [
+    {
+      "file": "js\\admin-ui.js",
+      "line": 133,
+      "column": 8,
+      "kind": "js:string"
+    }
+  ],
+  "Нельзя ставить точку в имени папки.": [
+    {
+      "file": "js\\admin-ui.js",
+      "line": 161,
+      "column": 23,
+      "kind": "js:string"
+    }
+  ],
+  "Имя файла не может начинаться с точки.": [
+    {
+      "file": "js\\admin-ui.js",
+      "line": 166,
+      "column": 23,
+      "kind": "js:string"
+    }
+  ],
+  "Введите имя для удаления!": [
+    {
+      "file": "js\\admin-ui.js",
+      "line": 175,
+      "column": 32,
+      "kind": "js:string"
+    }
+  ],
+  "❌ JSON-файл не найден:": [
+    {
+      "file": "scripts\\clean-portfolio.js",
+      "line": 48,
+      "column": 18,
+      "kind": "js:string"
+    }
+  ],
+  "❌ Ошибка парсинга JSON:": [
+    {
+      "file": "scripts\\clean-portfolio.js",
+      "line": 57,
+      "column": 18,
+      "kind": "js:string"
+    }
+  ],
+  "✅ JSON очищен и сохранён:": [
+    {
+      "file": "scripts\\clean-portfolio.js",
+      "line": 78,
+      "column": 14,
+      "kind": "js:string"
+    }
+  ],
+  "🗂 Бэкап:": [
+    {
+      "file": "scripts\\clean-portfolio.js",
+      "line": 79,
+      "column": 14,
+      "kind": "js:string"
+    }
+  ],
+  "— детали —": [
+    {
+      "file": "scripts\\clean-portfolio.js",
+      "line": 83,
+      "column": 16,
+      "kind": "js:string"
+    }
+  ],
+  "Ошибка чтения папки:": [
+    {
+      "file": "scripts\\generatePortfolioJson.js",
+      "line": 54,
+      "column": 18,
+      "kind": "js:string"
+    }
+  ],
+  "Не удалось проверить симлинк:": [
+    {
+      "file": "scripts\\generatePortfolioJson.js",
+      "line": 73,
+      "column": 19,
+      "kind": "js:string"
+    }
+  ],
+  "Ошибка чтения файла:": [
+    {
+      "file": "scripts\\generatePortfolioJson.js",
+      "line": 100,
+      "column": 22,
+      "kind": "js:string"
+    }
+  ],
+  "Запуск генерации portfolio.json — читаем:": [
+    {
+      "file": "scripts\\generatePortfolioJson.js",
+      "line": 112,
+      "column": 16,
+      "kind": "js:string"
+    }
+  ],
+  "✅ portfolio.json обновлён:": [
+    {
+      "file": "scripts\\generatePortfolioJson.js",
+      "line": 116,
+      "column": 16,
+      "kind": "js:string"
+    }
+  ],
+  "Ошибка генерации JSON:": [
+    {
+      "file": "scripts\\generatePortfolioJson.js",
+      "line": 118,
+      "column": 18,
+      "kind": "js:string"
+    }
+  ],
+  "📁 Создана папка uploads": [
+    {
+      "file": "server.js",
+      "line": 105,
+      "column": 14,
+      "kind": "js:string"
+    }
+  ],
+  "📁 Создана папка trash": [
+    {
+      "file": "server.js",
+      "line": 109,
+      "column": 14,
+      "kind": "js:string"
+    }
+  ],
+  "folderPath обязателен": [
+    {
+      "file": "server.js",
+      "line": 251,
+      "column": 34,
+      "kind": "js:string"
+    }
+  ],
+  "Не удалось создать папку": [
+    {
+      "file": "server.js",
+      "line": 261,
+      "column": 32,
+      "kind": "js:string"
+    }
+  ],
+  "Ошибка загрузки": [
+    {
+      "file": "server.js",
+      "line": 271,
+      "column": 51,
+      "kind": "js:string"
+    }
+  ],
+  "Файл не получен": [
+    {
+      "file": "server.js",
+      "line": 273,
+      "column": 49,
+      "kind": "js:string"
+    }
+  ],
+  "(корень)": [
+    {
+      "file": "server.js",
+      "line": 287,
+      "column": 56,
+      "kind": "js:string"
+    }
+  ],
+  "Ошибка при перемещении файла": [
+    {
+      "file": "server.js",
+      "line": 298,
+      "column": 34,
+      "kind": "js:string"
+    }
+  ],
+  "Нужно oldPath и newPath": [
+    {
+      "file": "server.js",
+      "line": 308,
+      "column": 34,
+      "kind": "js:string"
+    }
+  ],
+  "Источник не найден": [
+    {
+      "file": "server.js",
+      "line": 312,
+      "column": 58,
+      "kind": "js:string"
+    }
+  ],
+  "Не удалось переименовать": [
+    {
+      "file": "server.js",
+      "line": 326,
+      "column": 32,
+      "kind": "js:string"
+    }
+  ],
+  "Нужно targetPath": [
+    {
+      "file": "server.js",
+      "line": 334,
+      "column": 49,
+      "kind": "js:string"
+    },
+    {
+      "file": "server.js",
+      "line": 362,
+      "column": 49,
+      "kind": "js:string"
+    }
+  ],
+  "Не найдено": [
+    {
+      "file": "server.js",
+      "line": 337,
+      "column": 58,
+      "kind": "js:string"
+    }
+  ],
+  "Не удалось удалить": [
+    {
+      "file": "server.js",
+      "line": 354,
+      "column": 32,
+      "kind": "js:string"
+    }
+  ],
+  "Файл не найден в корзине": [
+    {
+      "file": "server.js",
+      "line": 370,
+      "column": 45,
+      "kind": "js:string"
+    }
+  ],
+  "Метаданные не найдены": [
+    {
+      "file": "server.js",
+      "line": 376,
+      "column": 34,
+      "kind": "js:string"
+    }
+  ],
+  "Не удалось восстановить": [
+    {
+      "file": "server.js",
+      "line": 394,
+      "column": 32,
+      "kind": "js:string"
+    }
+  ],
+  "Корзина очищена": [
+    {
+      "file": "server.js",
+      "line": 410,
+      "column": 46,
+      "kind": "js:string"
+    }
+  ],
+  "Не удалось очистить корзину": [
+    {
+      "file": "server.js",
+      "line": 413,
+      "column": 32,
+      "kind": "js:string"
+    }
+  ],
+  "Не удалось перегенерировать JSON": [
+    {
+      "file": "server.js",
+      "line": 424,
+      "column": 32,
+      "kind": "js:string"
+    }
+  ],
+  "📂 portfolio.json синхронизирован с папкой uploads": [
+    {
+      "file": "server.js",
+      "line": 447,
+      "column": 16,
+      "kind": "js:string"
+    }
+  ],
+  "Ошибка при первичной генерации JSON:": [
+    {
+      "file": "server.js",
+      "line": 449,
+      "column": 18,
+      "kind": "js:string"
+    }
+  ],
+  "Образ эпохи Эдо": [
+    {
+      "file": "services.html",
+      "line": 0,
+      "column": 0,
+      "kind": "html:attr:alt"
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+/*  home.
+
+================================
+     Intro
+  ================================ */
+.intro-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  text-align: center;
+}
+.intro-image-wrapper {
+  width: var(--intro-avatar-size);
+  aspect-ratio: 1 / 1; /* гарантируем квадрат */
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+  flex: 0 0 var(--intro-avatar-size); /* <— запретить сжатие! */
+}
+.intro-text-wrapper {
+  font-size: 1.5rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ================================
+   Services Intro
+================================ */
+#services-intro {
+  padding: 2rem 1rem;
+  background: var(--surface-primary-light);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+  gap: 2rem;
+  justify-content: center; /* важно: чтобы «обрезанные» ряды были по центру */
+}
+
+.services-title {
+  font-family: var(--font-heading);
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.service-card {
+  max-width: 320px;
+  margin: 0 auto; /* чтобы выравнивалось красиво */
+  background: var(--surface-1);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--dur-quick) var(--easing),
+    box-shadow var(--dur-quick) var(--easing);
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-lg);
+}
+
+.service-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* делаем квадрат */
+  object-fit: cover; /* обрезаем по краям, но заполняем весь квадрат */
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+}
+
+.service-card-content {
+  padding: 1rem;
+  text-align: center;
+}
+
+.service-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+}
+
+.service-card p {
+  font-size: 1.3rem;
+  color: var(--color-text-muted);
+}
+
+/* ================================
+   About / Team
+================================ */
+#about {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+#about .section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: var(--color-primary);
+}
+
+/* Сетка команды */
+.team {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile-first — одна колонка */
+  gap: 2rem;
+  justify-content: center;
+}
+
+/* Карточка участника */
+.team-member {
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* Фото круглое */
+.team-member img {
+  display: block;
+  margin: 0 auto 15px;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Имя */
+.team-member h3 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  color: var(--color-text-strong);
+}
+
+/* Описание */
+.team-member p {
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+/* ================================
+     Media queries
+  ================================ */
+
+/* планшет */
+@media (min-width: 768px) {
+  .intro-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    padding: 2rem;
+    gap: 2rem;
+  }
+
+  .intro-text-wrapper {
+    flex: 1 1 auto; /* текст тянется на оставшееся пространство */
+  }
+
+  .services-list {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-items: center;
+  }
+  .team {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+    justify-content: center;
+  }
+}
+
+/* десктоп */
+@media (min-width: 1200px) {
+  .services-title {
+    font-size: 1.4rem;
+  }
+}
