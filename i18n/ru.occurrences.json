@@ -211,20 +211,6 @@
       "kind": "js:string"
     }
   ],
-  "❌ Папка не найдена": [
-    {
-      "file": "js\\admin-portfolio — копия.js",
-      "line": 154,
-      "column": 30,
-      "kind": "js:string"
-    },
-    {
-      "file": "js\\admin-portfolio.js",
-      "line": 156,
-      "column": 30,
-      "kind": "js:string"
-    }
-  ],
   "Ошибка загрузки JSON:": [
     {
       "file": "js\\admin-portfolio — копия.js",

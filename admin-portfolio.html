@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/main-styles.css" />
     <link rel="stylesheet" href="css/header-contrast.css" />
-    <!--  <link rel="stylesheet" href="css/admin-header.css" /> -->
 
     <link rel="stylesheet" href="css/MOBILE-FIRST.css" />
     <link rel="stylesheet" href="css/admin-portfolio-desktop.css" />
@@ -63,10 +62,12 @@
           console.error = window.__consoleOriginal.error;
         }
       })();
-/*
-
-*/
-
+// этот скрипт выключает дебаг, чтобы не видеть шум кухни в консоли
+// как включить дебаг обратно (чтобы видеть логи):
+// Открой консоль (F12).
+// Введи команду: localStorage.setItem("fm_debug", "1")
+// Обнови страницу.
+ 
     </script>
     
 
@@ -106,60 +107,7 @@
         </button>
 
         <div class="admin-header">
-   <!--        <h2>Control panel</h2>
-        </div>
-        <p class="admin-hint">
-          ⚠️ Before creating a folder or file, ensure you are in the correct
-          section.
-        </p>
-
-        <div class="admin-ops">
-          <fieldset class="op-block">
-            <legend class="op-title">Create / Portfolio</legend>
-            <div class="row create-group">
-              <input
-                id="mkdirName"
-                class="admin-input"
-                placeholder="Enter folder name"
-              />
-              <button id="btnMkdir" class="ok" type="button">
-                Create folder
-              </button>
-              <input type="file" id="fileInput" class="admin-input" />
-              <button id="btnUpload" class="ok" type="button">Upload</button>
-            </div>
-          </fieldset>
-
-          <fieldset class="op-block">
-            <legend class="op-title">Rename</legend>
-            <div class="row rename-group">
-              <input
-                id="renameOld"
-                class="admin-input"
-                placeholder="Old folder/file name"
-              />
-              <input
-                id="renameNew"
-                class="admin-input"
-                placeholder="New folder/file name"
-              />
-              <button id="btnRename" type="button">Rename</button>
-            </div>
-          </fieldset>
-
-          <fieldset class="op-block">
-            <legend class="op-title">Delete</legend>
-            <div class="row delete-group">
-              <input
-                id="deleteName"
-                class="admin-input"
-                placeholder="Enter folder/file name"
-              />
-              <button id="btnDelete" type="button">Delete</button>
-              <button id="btnRestore" type="button">Restore</button>
-            </div>
-          </fieldset>
-       -->  </div>
+ </div>
       
                 <!-- Новый блок для дерева файловой структуры -->
                 <div id="tree-panel" class="panel left-panel">
@@ -374,15 +322,7 @@
                 >
                 <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
                 </button>
-<!--
-                <button id="themeToggleBtn" title="Переключить тему">
-                  <span id="themeIconContainer">
-                      
-                  </span>
-                  
-                  <span id="themeName" style="display: none;"></span> 
-              </button>
--->
+
       
               </div>
               <div id="context-menu" class="context-menu hidden">
@@ -482,13 +422,7 @@
       </div>
     </div>
 
-    
-    
-    
-
-
-  <!--   <script type="module" src="src/index.js"></script>-->
-
+    <script src="js/api-config.js"></script>
     <script src="js/header.js"></script>
 
     <script src="js/admin-ui.js"></script>
@@ -496,9 +430,7 @@
 
   
     <script src="js/error-handler.js"></script>
-
-     <!--    <script src="data/portfolio-admin-page/js/ModalConfirm.js"></script>-->
-    <script src="data/portfolio-admin-page/js/FileTree.js"></script>
+<script src="data/portfolio-admin-page/js/FileTree.js"></script>
     <script src="data/portfolio-admin-page/js/FileOperations.js"></script>
   </body>
 </html>

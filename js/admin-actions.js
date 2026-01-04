@@ -1,5 +1,8 @@
 // admin-actions.js (ИСПРАВЛЕННАЯ ВЕРСИЯ для нового файлового менеджера)
 
+const API_BASE_URL = "https://demo-split-backend.onrender.com";
+// Замени на реальный адрес, когда создашь новый сервис на Render
+
 /**
  * Получает текущий путь из активной панели файлового менеджера
  * ВАЖНО: Теперь использует window.getActivePath() из FileOperations.js
@@ -151,7 +154,7 @@ async function createFolder(name) {
       folderPath,
     });
 
-    const res = await fetch("/create-folder", {
+    const res = await fetch(`${API_BASE_URL}/create-folder`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ folderPath }),
@@ -223,7 +226,7 @@ async function uploadFile(file) {
   formData.append("file", file);
 
   try {
-    const res = await fetch("/upload-file", {
+    const res = await fetch(`${API_BASE_URL}/upload-file`, {
       method: "POST",
       body: formData,
     });
@@ -277,7 +280,7 @@ async function renameItem(oldName, newName, basePathOverride = undefined) {
   const newPath = basePath ? `${basePath}/${newName}` : newName;
 
   try {
-    const res = await fetch("/rename", {
+    const res = await fetch(`${API_BASE_URL}/rename`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ oldPath, newPath }),
@@ -340,7 +343,7 @@ async function deleteItem(name, options = {}) {
   }
 
   try {
-    const res = await fetch("/delete", {
+    const res = await fetch(`${API_BASE_URL}/delete`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ targetPath }),
@@ -405,7 +408,7 @@ async function restoreItem() {
   console.log("[restoreItem] Recovery:", lastDeletedItem);
 
   try {
-    const res = await fetch("/restore", {
+    const res = await fetch(`${API_BASE_URL}/restore`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ targetPath: lastDeletedItem.path }),
@@ -448,7 +451,7 @@ async function uploadFileTo(file, folderPath) {
   formData.append("file", file);
 
   try {
-    const res = await fetch("/upload-file", {
+    const res = await fetch(`${API_BASE_URL}/upload-file`, {
       method: "POST",
       body: formData,
     });

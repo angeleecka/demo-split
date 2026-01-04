@@ -6,7 +6,7 @@ import { initPortfolio } from "./js/portfolio.js";
 
 // Админка
 import { initAdminActions } from "./js/admin-actions.js";
-//import { initAdminPortfolio } from "./js/admin-portfolio.js";
+
 import { initAdminUI } from "./js/admin-ui.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (document.querySelector(".admin-body")) {
     initAdminActions?.();
-    //initAdminPortfolio?.();
+
     initAdminUI?.();
   }
 });
