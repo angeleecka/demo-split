@@ -48,7 +48,7 @@ function toServerRelPath(pathValue) {
   // убираем внешние слэши
   p = p.replace(/^\/+/, "").replace(/\/+$/, "");
 
-  // ✅ удаляем только ПЕРВЫЙ СЕГМЕНТ, если это ровно Upload/Uploads/Portfolio (регистр не важен)
+  // ✅ удаляем только ПЕРВЫЙ СЕГМЕНТ (регистр не важен)
   // важно: (?:\/|$) — значит "сегмент закончился", а не просто начинается похоже
   p = p.replace(/^(?:upload|uploads|portfolio)(?:\/|$)/i, "");
 
@@ -222,7 +222,7 @@ async function uploadFile(file) {
   console.log("[uploadFile] activeDomPath:", activeDomPath);
   console.log("[uploadFile] folderPath(basePath):", basePath);
 
-  formData.append("folderPath", basePath); // "" = корень uploads/
+  formData.append("folderPath", basePath);
   formData.append("file", file);
 
   try {

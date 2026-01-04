@@ -391,7 +391,7 @@ function initAdminLassoSelection() {
           const rel = basePath ? basePath + "/" + name : name;
           return {
             type: "image",
-            src: "uploads/" + rel,
+            src: window.API_BASE_URL + "/uploads/" + rel,
             caption: name,
           };
         }

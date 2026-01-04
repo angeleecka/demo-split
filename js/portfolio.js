@@ -72,7 +72,9 @@
         files.forEach((fileNode) => {
           const file = fileNode.name;
           const ext = file.split(".").pop().toLowerCase();
-          const filePath = `uploads/${path.join("/")}/${file}`;
+          const filePath = `${window.API_BASE_URL}/uploads/${path.join(
+            "/"
+          )}/${file}`;
 
           if (["jpg", "jpeg", "png", "webp", "gif"].includes(ext)) {
             const img = document.createElement("img");

@@ -508,7 +508,7 @@ function buildPreviewUrl(pathArr, name) {
     .filter(Boolean)
     .map(encodeURIComponent);
 
-  return `/uploads/${parts.join("/")}`;
+  return `${window.API_BASE_URL}/uploads/${parts.join("/")}`;
 }
 
 function fmUpdateLightboxItems(listId, pathArr, entries) {
@@ -1016,14 +1016,14 @@ function fmPayloadFromEvent(e) {
 }
 
 function fmServerBaseFromList(listEl) {
-  const domPath = (listEl?.dataset?.path || "").trim(); // типа: "Upload/Trailers"
-  const arr = ensurePathArray(domPath); // -> ["Upload","Trailers"]
+  const domPath = (listEl?.dataset?.path || "").trim();
+  const arr = ensurePathArray(domPath);
   const safeArr = normalizePathForServer(arr); // -> ["Trailers"]
   return safeArr.join("/"); // -> "Trailers" или ""
 }
 
 function fmBuildPath(base, name) {
-  return base ? `${base}/${name}` : name; // относит. к /uploads
+  return base ? `${base}/${name}` : name;
 }
 
 async function fmMoveItems(sourceBase, items, targetBase) {
@@ -1052,7 +1052,7 @@ async function fmMoveItems(sourceBase, items, targetBase) {
 async function fmUploadFilesTo(targetBase, files) {
   for (const f of files) {
     const form = new FormData();
-    form.append("folderPath", targetBase || ""); // "" = корень uploads/
+    form.append("folderPath", targetBase || "");
     form.append("file", f);
 
     const res = await fetch(window.API_BASE_URL + "/upload-file", {
