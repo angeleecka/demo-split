@@ -821,7 +821,7 @@ async function moveItemsToFolder(names, targetFolderPath) {
       const oldPath = base ? `${base}/${nm}` : nm;
       const newPath = targetFolderPath ? `${targetFolderPath}/${nm}` : nm;
 
-      const res = await fetch("/rename", {
+      const res = await fetch(window.API_BASE_URL + "/rename", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ oldPath, newPath }),
@@ -855,7 +855,10 @@ async function uploadFileTo(file, folderPath) {
   formData.append("file", file);
 
   try {
-    const res = await fetch("/upload-file", { method: "POST", body: formData });
+    const res = await fetch(window.API_BASE_URL + "/upload-file", {
+      method: "POST",
+      body: formData,
+    });
     const result = await (typeof handleResponse === "function"
       ? handleResponse(res)
       : res.json?.());

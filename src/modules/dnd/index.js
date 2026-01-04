@@ -42,7 +42,7 @@ export async function moveItems(items, targetPath) {
 
     console.log(`[moveItems] Moving: ${oldPath} → ${newPath}`);
 
-    const res = await fetch(cfg.renameUrl, {
+    const res = await fetch(`${window.API_BASE_URL}${cfg.renameUrl}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ oldPath, newPath }),
@@ -60,7 +60,10 @@ async function uploadFilesTo(path, files) {
     const form = new FormData();
     form.append("folderPath", path || "");
     form.append("file", f);
-    const res = await fetch(cfg.uploadUrl, { method: "POST", body: form });
+    const res = await fetch(`${window.API_BASE_URL}${cfg.uploadUrl}`, {
+      method: "POST",
+      body: form,
+    });
     if (typeof window.handleResponse === "function") {
       await window.handleResponse(res);
     } else if (!res.ok) {

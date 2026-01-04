@@ -276,7 +276,8 @@ function transformPortfolioJson(json) {
 
 async function fetchDataFromApi() {
   try {
-    const url = `data/portfolio.json?_=${Date.now()}`;
+    const url = window.API_BASE_URL + "/data/portfolio.json?_=" + Date.now();
+
     const resp = await fetch(url, { cache: "reload" });
 
     if (!resp.ok) {
@@ -1034,7 +1035,7 @@ async function fmMoveItems(sourceBase, items, targetBase) {
     if (newPath === oldPath) continue;
     if (it.kind === "folder" && newPath.startsWith(oldPath + "/")) continue;
 
-    const res = await fetch("/rename", {
+    const res = await fetch(window.API_BASE_URL + "/rename", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ oldPath, newPath }),
@@ -1054,7 +1055,10 @@ async function fmUploadFilesTo(targetBase, files) {
     form.append("folderPath", targetBase || ""); // "" = корень uploads/
     form.append("file", f);
 
-    const res = await fetch("/upload-file", { method: "POST", body: form });
+    const res = await fetch(window.API_BASE_URL + "/upload-file", {
+      method: "POST",
+      body: form,
+    });
 
     if (typeof window.handleResponse === "function") {
       await window.handleResponse(res);
@@ -2713,7 +2717,7 @@ window.addEventListener("load", async () => {
   const ICON_DARK = `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
     <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="none" stroke="currentColor" stroke-width="2"/>
     <path d="M17 3v2M19 4h2M15 5h2M17 6v2" fill="none" stroke="currentColor" stroke-width="2"/>
-</svg>`;
+    </svg>`;
 
   window.setTheme = (theme) => {
     if (theme === "dark") {

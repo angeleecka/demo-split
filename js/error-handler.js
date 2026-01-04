@@ -14,7 +14,7 @@
       if (now - last < _cooldownMs) return;
       _lastSent.set(key, now);
 
-      return fetch("/log-error", {
+      return fetch(window.API_BASE_URL + "/log-error", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

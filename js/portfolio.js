@@ -14,7 +14,9 @@
   }
 
   // Загружаем JSON
-  fetch("/data/portfolio.json?_=" + Date.now(), { cache: "reload" })
+  fetch(window.API_BASE_URL + "/data/portfolio.json?_=" + Date.now(), {
+    cache: "reload",
+  })
     .then((res) => res.json())
     .then((data) => {
       let currentNode = { children: data };

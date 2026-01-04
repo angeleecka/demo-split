@@ -27,7 +27,7 @@ function readPathFromURL() {
 }
 
 async function loadData() {
-  const url = `${cfg.dataUrl}?_=${Date.now()}`; // форсим обновление
+  const url = `${window.API_BASE_URL}/${cfg.dataUrl}?_=${Date.now()}`; // форсим обновление
   const r = await fetch(url, { cache: "reload" });
   return await r.json();
 }

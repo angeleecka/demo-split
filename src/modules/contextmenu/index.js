@@ -235,7 +235,7 @@ function showMenu(x, y, targetEl) {
       // удаляем по одному, но без лишних перерисовок/тостов
       for (const name of names) {
         const targetPath = base ? `${base}/${name}` : name;
-        const res = await fetch("/delete", {
+        const res = await fetch(window.API_BASE_URL + "/delete", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ targetPath }),
@@ -279,7 +279,7 @@ function showMenu(x, y, targetEl) {
         const oldPath = base ? `${base}/${name}` : name;
         const newPath = `${targetPath}/${name}`;
         try {
-          const res = await fetch("/rename", {
+          const res = await fetch(window.API_BASE_URL + "/rename", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ oldPath, newPath }),
@@ -373,7 +373,7 @@ function showMenu(x, y, targetEl) {
           : it.name;
         const newPath = targetPath ? `${targetPath}/${it.name}` : it.name;
         try {
-          const res = await fetch("/rename", {
+          const res = await fetch(window.API_BASE_URL + "/rename", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ oldPath, newPath }),
